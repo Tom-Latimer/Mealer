@@ -10,6 +10,12 @@ public class Cook_Class extends User_Class {
         set_void_check(void_check);
         set_description(description);
     }
+    private String get_void_check(){
+        return void_check;
+    }
+    private String get_description(){
+        return description;
+    }
     private void set_void_check(String void_check){
         this.void_check = void_check;
     }
