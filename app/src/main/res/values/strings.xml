@@ -13,4 +13,6 @@
     <string name="sign_in">Sign In</string>
     <string name="client">Client</string>
     <string name="cook">Cook</string>
+    <string name="or">or</string>
+    <string name="welcome_message_slogan">Join the community</string>
 </resources>
