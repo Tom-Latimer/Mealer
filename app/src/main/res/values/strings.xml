@@ -9,4 +9,8 @@
     <string name="card_number">Card Number</string>
     <string name="security_code">CVV</string>
     <string name="expiration_date">MM/YY</string>
+    <string name="welcome_message">Welcome to Mealer!</string>
+    <string name="sign_in">Sign In</string>
+    <string name="client">Client</string>
+    <string name="cook">Cook</string>
 </resources>
