@@ -22,27 +22,36 @@ public class CookSignUp extends AppCompatActivity {
         setContentView(R.layout.activity_cook_sign_up);
     }
 
-    protected void ChooseImageBtn(){
-        Intent chooseVoidCheckPhoto = new Intent(Intent.ACTION_PICK);
-        chooseVoidCheckPhoto.setType("image/*");
-        startActivityForResult(chooseVoidCheckPhoto, RESULT_LOAD_IMG);
+    public void btnBackToMain(View view){
+        startActivity(new Intent(CookSignUp.this, MainActivity.class));
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    //protected void ChooseImageBtn(){
+    //    Intent chooseVoidCheckPhoto = new Intent(Intent.ACTION_PICK);
+    //    chooseVoidCheckPhoto.setType("image/*");
+    //    onActivityForResult(chooseVoidCheckPhoto);
+    //}
 
-        if (resultCode == RESULT_OK) {
-            try {
-                final Uri photoURI = data.getData();
-                final InputStream photoInputStream = getContentResolver().openInputStream(photoURI);
-                final Bitmap photoCheque = BitmapFactory.decodeStream(photoInputStream);
-                imgCheque.setImageBitmap(photoCheque);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Toast.makeText(PostImage.this, "There was an issue.", Toast.LENGTH_LONG).show();
-            }
+    //protected void onActivityResult(int requestCode, int resultCode, Intent data){
 
-        }else {
-            Toast.makeText(PostImage.this, "No image was selected",Toast.LENGTH_LONG).show();
-        }
-    }
+    //    final Uri photoURI = data.getData();
+    //    final InputStream photoInputStream = getContentResolver().openInputStream(photoURI);
+    //    final Bitmap photoCheque = BitmapFactory.decodeStream(photoInputStream);
+    //    imgCheque.setImageBitmap(photoCheque);
+
+        //if (resultCode == RESULT_OK) {
+        //    try {
+        //        final Uri photoURI = data.getData();
+        //        final InputStream photoInputStream = getContentResolver().openInputStream(photoURI);
+        //        final Bitmap photoCheque = BitmapFactory.decodeStream(photoInputStream);
+        //        imgCheque.setImageBitmap(photoCheque);
+        //    } catch (FileNotFoundException e) {
+        //        e.printStackTrace();
+        //        Toast.makeText(PostImage.this, "There was an issue.", Toast.LENGTH_LONG).show();
+        //    }
+
+        //}else {
+        //    Toast.makeText(PostImage.this, "No image was selected",Toast.LENGTH_LONG).show();
+        //}
+    //}
 }
