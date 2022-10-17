@@ -66,7 +66,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstNameField" />
+        app:layout_constraintTop_toBottomOf="@+id/lastNameField" />
 
     <EditText
         android:id="@+id/passwordField"
@@ -114,17 +114,19 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
+        app:layout_constraintTop_toBottomOf="@+id/firstNameField" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signUpButtonClient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/button_background"
+        android:onClick="btnSignUpAuthClick"
         android:text="@string/sign_up"
+        android:textColor="#fdd835"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
@@ -150,9 +152,10 @@
         android:paddingBottom="10dp"
         android:textColorHint="@color/black"
         android:textSize="20sp"
+        android:maxLength="16"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameField" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -182,7 +185,8 @@
             android:paddingEnd="17dp"
             android:paddingBottom="10dp"
             android:textColorHint="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:maxLength="3"/>
 
         <EditText
             android:id="@+id/expirationDateField"
@@ -200,7 +204,8 @@
             android:paddingEnd="17dp"
             android:paddingBottom="10dp"
             android:textColorHint="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:maxLength="5"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
