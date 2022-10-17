@@ -27,7 +27,7 @@ public class CookSignUp extends AppCompatActivity {
         startActivity(new Intent(CookSignUp.this, Home.class));
     }
 
-    protected void ChooseImageBtn(){
+    protected void ChooseImageBtn(View view){
         Intent chooseVoidCheckPhoto = new Intent();
         chooseVoidCheckPhoto.setType("image/*");
         chooseVoidCheckPhoto.setAction(Intent.ACTION_GET_CONTENT);
