@@ -14,10 +14,10 @@ public class SignIn extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
     }
 
-    public void backbtnSignIn(View view){
+    public void backbtnSignIn(View view){ //goes back to main activity
         startActivity(new Intent(SignIn.this, MainActivity.class));
     }
-    public void btn_SignIn(View view){
+    public void btn_SignIn(View view){ //goes to home activity
         startActivity(new Intent(SignIn.this, Home.class));
     }
 }
