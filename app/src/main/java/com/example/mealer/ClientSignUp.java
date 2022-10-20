@@ -68,64 +68,53 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
         String securityCode = securityCodeField.getText().toString().trim();
         String expirationDate = expirationDateField.getText().toString().trim();
 
-        if (firstName.isEmpty()) {
-            firstNameField.setError("First Name Required");
+        Verification_Class verify = new Verification_Class();
+
+        String firstNameError = verify.checkFirstName(firstName);
+        if (firstNameError != "") {
+            firstNameField.setError(firstNameError);
             firstNameField.requestFocus();
             isAcceptable = false;
         }
 
-        if (lastName.isEmpty()) {
-            lastNameField.setError("Last Name Required");
+        String lastNameError = verify.checkLastName(lastName);
+        if (lastNameError != "") {
+            lastNameField.setError(lastNameError);
             lastNameField.requestFocus();
             isAcceptable = false;
         }
 
-        if (password.isEmpty()) {
-            passwordField.setError("Please enter a password");
-            passwordField.requestFocus();
-            isAcceptable = false;
-        } else if (password.length() < 6) {
-            passwordField.setError("Password must be at least 6 characters");
+        String passwordError = verify.checkPassword(password);
+        if (passwordError != "") {
+            passwordField.setError(passwordError);
             passwordField.requestFocus();
             isAcceptable = false;
         }
 
-        if (email.isEmpty()) {
-            emailField.setError("Email Required");
-            emailField.requestFocus();
-            isAcceptable = false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Invalid Email");
+        String emailError = verify.checkEmail(email);
+        if (emailError != "") {
+            emailField.setError(emailError);
             emailField.requestFocus();
             isAcceptable = false;
         }
 
-        if (ccNumber.isEmpty()) {
-            creditCardNumberField.setError("Field Empty");
-            creditCardNumberField.requestFocus();
-            isAcceptable = false;
-        } else if (ccNumber.length() < 16) {
-            creditCardNumberField.setError("Please enter all numbers");
+        String ccNumberError = verify.checkCCNumber(ccNumber);
+        if (ccNumberError != "") {
+            creditCardNumberField.setError(ccNumberError);
             creditCardNumberField.requestFocus();
             isAcceptable = false;
         }
 
-        if (securityCode.isEmpty()) {
-            securityCodeField.setError("Field Empty");
-            securityCodeField.requestFocus();
-            isAcceptable = false;
-        } else if (securityCode.length() < 3) {
-            securityCodeField.setError("Please enter all numbers");
+        String securityCodeError = verify.checkSecurityCode(securityCode);
+        if (securityCodeError != "") {
+            securityCodeField.setError(securityCodeError);
             securityCodeField.requestFocus();
             isAcceptable = false;
         }
 
-        if (expirationDate.isEmpty()) {
-            expirationDateField.setError("Field Empty");
-            expirationDateField.requestFocus();
-            isAcceptable = false;
-        } else if (expirationDate.length() < 5) {
-            expirationDateField.setError("Please enter a date");
+        String expirationDateError = verify.checkExpirationDate(expirationDate);
+        if (expirationDateError != "") {
+            expirationDateField.setError(expirationDateError);
             expirationDateField.requestFocus();
             isAcceptable = false;
         }
