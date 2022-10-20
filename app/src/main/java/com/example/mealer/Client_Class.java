@@ -7,10 +7,10 @@ public class Client_Class extends User_Class {
         super(name, last_name, email, password, address, type);
         set_cc_information(cc_information);
     }
-    private String get_cc_information(){
+    public String get_cc_information(){
         return this.cc_information;
     }
-    private void set_cc_information(String cc_information){
+    public void set_cc_information(String cc_information){
         this.cc_information = cc_information;
     }
 }
