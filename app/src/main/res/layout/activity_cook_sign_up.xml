@@ -245,7 +245,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayoutCheque"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="230dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -257,15 +257,18 @@
                     <ImageView
                         android:id="@+id/imgCheque"
                         android:layout_width="180dp"
-                        android:layout_height="200dp"
+                        android:layout_height="190dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_weight="1" />
 
                     <ImageView
                         android:id="@+id/btnChooseImage"
                         android:layout_width="40dp"
                         android:layout_height="41dp"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="0dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginEnd="20dp"
                         android:onClick="ChooseImageBtn"
                         app:srcCompat="@android:drawable/stat_sys_upload" />
 

@@ -3,28 +3,39 @@ package com.example.mealer;
 import android.net.Uri;
 
 public class Cook_Class extends User_Class {
-    private Uri void_check; //needs to be a picture, not sure how to store that yet
     private String description;
+    private String postalCode;
+    private String country;
+    private String unitNum;
+    private String void_check_URL;
 
-
-    public Cook_Class(String name , String last_name, String email , String password , String address , String type , Uri void_check , String description){
-        super(name , last_name, email , password ,  address , type );
-        set_void_check(void_check);
+    public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description){
+        super(first_name , last_name, email , password ,  address , type);
+        set_postal_code(postalCode);
+        set_country(country);
+        set_unit_num(unitNum);
+        set_void_check(void_check_URL);
         set_description(description);
     }
-    private Uri get_void_check(){
-        return void_check;
+    public String get_void_check_URL(){
+        return void_check_URL;
     }
-    private String get_description(){
+    public String get_description(){
         return description;
     }
-    private void set_void_check(Uri void_check){
-        this.void_check = void_check;
+    public String get_postal_code() { return postalCode; }
+    public String get_country() { return country; }
+    public String get_unit_num() { return unitNum; }
+    public void set_postal_code(String postalCode) { this.postalCode = postalCode; }
+    public void set_country(String country) { this.country = country; }
+    public void set_unit_num(String unitNum) { this.unitNum = unitNum; }
+    public void set_void_check(String void_check){
+        this.void_check_URL = void_check;
     }
-    private void set_description(String description){
+    public void set_description(String description){
         this.description = description;
     }
-    private void create_meal(String name, String description, String price, String Meal_type, String Cuisine_type, String[] ingredients, String[] allergens){
+    public void create_meal(String name, String description, String price, String Meal_type, String Cuisine_type, String[] ingredients, String[] allergens){
         Meal_Class meal = new Meal_Class(name, description, price, Meal_type, Cuisine_type, ingredients, allergens);
 
     }

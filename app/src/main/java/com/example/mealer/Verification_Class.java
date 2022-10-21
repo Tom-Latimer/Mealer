@@ -1,5 +1,6 @@
 package com.example.mealer;
 
+import android.net.Uri;
 import android.util.Patterns;
 
 public class Verification_Class {
@@ -118,9 +119,13 @@ public class Verification_Class {
         return error;
     }
 
-    //public String checkVoidCheque(String voidCheque){
-
-    //}
+    public String checkVoidCheque(Uri voidCheque){
+        String error = "";
+        if (voidCheque == null){
+            error = "Please upload an image of a void cheque";
+        }
+        return error;
+    }
 
     public String checkDescription(String description){
         String error = "";

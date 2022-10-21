@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -15,15 +16,27 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.UploadTask;
+
+import org.w3c.dom.Text;
+
 
 public class CookSignUp extends AppCompatActivity {
 
@@ -34,6 +47,7 @@ public class CookSignUp extends AppCompatActivity {
             passwordField, addressField, unitField, postalCodeField,
             countryField, descriptionField;
     private ImageView imgCheque;
+    private TextView lblVoidCheque;
 
     private FirebaseAuth mAuth;
 
@@ -41,6 +55,8 @@ public class CookSignUp extends AppCompatActivity {
 
     Uri imageURI;
 
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Image");
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,26 +74,27 @@ public class CookSignUp extends AppCompatActivity {
         postalCodeField = (EditText) findViewById(R.id.postalCodeField);
         countryField = (EditText) findViewById(R.id.countryField);
         imgCheque = (ImageView) findViewById(R.id.imgCheque);
+        lblVoidCheque = (TextView) findViewById(R.id.lblVoidCheque);
         descriptionField = (EditText) findViewById(R.id.descriptionField);
 
-        //signUpButtonCook = (AppCompatButton) findViewById(R.id.signUpButtonCook);
-        //signUpButtonCook.setOnClickListener(this);
     }
 
-    public void btnBackToMain(View view){
+    public void btnBackToMain(View view) {
         startActivity(new Intent(CookSignUp.this, MainActivity.class));
     }
 
-    public void btnCookToHome(View view){
+    public void btnCookToHome(View view) {
+        //uploadImage();
         registerUser();
 
-        if (isAcceptable){
+        if (isAcceptable) {
+
             startActivity(new Intent(CookSignUp.this, Home.class));
         }
 
     }
 
-    public void ChooseImageBtn(View view){
+    public void ChooseImageBtn(View view) {
         Intent chooseVoidCheckPhoto = new Intent();
         chooseVoidCheckPhoto.setType("image/*");
         chooseVoidCheckPhoto.setAction(Intent.ACTION_GET_CONTENT);
@@ -109,6 +126,51 @@ public class CookSignUp extends AppCompatActivity {
         }
     }
 
+    private void uploadImage() {
+
+        isAcceptable = true;
+        Verification_Class verify = new Verification_Class();
+
+        String voidChequeError = verify.checkVoidCheque(imageURI);
+        if (voidChequeError != "") {
+            lblVoidCheque.setError(voidChequeError);
+            imgCheque.requestFocus();
+            //isAcceptable = false;
+        }
+
+        if (isAcceptable) {
+            StorageReference storageRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageURI));
+            storageRef.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            VoidCheck_Class voidCheck = new VoidCheck_Class(uri.toString());
+                            String voidCheckId = databaseReference.push().getKey();
+                            databaseReference.child(voidCheckId).setValue(voidCheck);
+
+                            Toast.makeText(CookSignUp.this, "Image successfully uploaded to database.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CookSignUp.this, "Image upload to database failed.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    public String getFileExtension(Uri imgUri) {
+
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(imgUri));
+
+    }
+
 
     private void registerUser() {
 
@@ -122,7 +184,6 @@ public class CookSignUp extends AppCompatActivity {
         String unitNum = unitField.getText().toString().trim();
         String postalCode = postalCodeField.getText().toString().trim();
         String country = countryField.getText().toString().trim();
-        //Drawable voidChequeDrawable = imgCheque.getDrawable();
         String description = descriptionField.getText().toString().trim();
 
         Verification_Class verify = new Verification_Class();
@@ -183,13 +244,6 @@ public class CookSignUp extends AppCompatActivity {
             isAcceptable = false;
         }
 
-        //String voidChequeError = verify.checkVoidCheque(voidCheque);
-        //if (voidChequeError != "") {
-        //    voidChequeField.setError(voidChequeError);
-        //    voidChequeField.requestFocus();
-        //    isAcceptable = false;
-        //}
-
         String descriptionError = verify.checkDescription(description);
         if (descriptionError != "") {
             descriptionField.setError(descriptionError);
@@ -197,12 +251,20 @@ public class CookSignUp extends AppCompatActivity {
             isAcceptable = false;
         }
 
+        String voidChequeError = verify.checkVoidCheque(imageURI);
+        if (voidChequeError != "") {
+            lblVoidCheque.setError(voidChequeError);
+            lblVoidCheque.requestFocus();
+            isAcceptable = false;
+        }
+
+
         if (isAcceptable) {
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Cook_Class cook = new Cook_Class(firstName , lastName, email , password ,  address , "COOK" , imageURI , description);
+                        Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", "imageURL", description);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getUid())
@@ -211,20 +273,18 @@ public class CookSignUp extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(CookSignUp.this,"User has successfully been registered!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(CookSignUp.this, "User has successfully been registered!", Toast.LENGTH_LONG).show();
                                         } else {
-                                            Toast.makeText(CookSignUp.this,"Failed to register!",Toast.LENGTH_LONG).show();
+                                            Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
 
                     } else {
-                        Toast.makeText(CookSignUp.this,"Failed to register!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
         }
-
-
     }
 }
