@@ -27,33 +27,37 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
+        /*
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId);
         welcomeMessage();
 
-
+         */
     }
     public void btnLogOutClick(View view){
         startActivity(new Intent(Home.this, MainActivity.class));
+
+            FirebaseAuth.getInstance().signOut();
     }
-    public void welcomeMessage() {
+
+
+    public void welcomeMessage(View view) {
         dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     User_Class user = (User_Class) task.getResult().getValue();
                     String type = user.get_type();
-                    //.setText("You are logged in as " + type)
+                    TextView greetingText= (TextView) findViewById(R.id.greetingtxt);
+                    greetingText.setText("You are logged in as "+ type);
+
                 }
             }
         });
     }
 
-    public void logout() {
-        FirebaseAuth.getInstance().signOut();
-    }
+
 
 
 }
