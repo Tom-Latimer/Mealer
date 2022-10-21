@@ -43,14 +43,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/user_SignIn2"
+            android:id="@+id/Email_Field3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="50dp"
             android:background="@drawable/edit_text_background"
             android:ems="10"
-            android:hint="Name"
+            android:hint="@string/email_address"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:paddingStart="20dp"
@@ -59,7 +59,7 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/Pass_SignIn"
+            android:id="@+id/Password_Field3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -75,7 +75,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/butt_SignIn"
+            android:id="@+id/btn_SignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btn_SignIn"
