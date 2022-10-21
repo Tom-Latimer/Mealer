@@ -246,7 +246,7 @@
                 android:background="@drawable/button_background"
                 android:onClick="btnSignUpAuthClick"
                 android:text="@string/sign_up"
-                android:textColor="@color/black"
+                android:textColor="#fdd835"
                 tools:ignore="DuplicateSpeakableTextCheck" />
         </LinearLayout>
     </ScrollView>
