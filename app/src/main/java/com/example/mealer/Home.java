@@ -27,15 +27,16 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dbRef = FirebaseDatabase.getInstance().getReference("Users")
-                .child(userId);
-        welcomeMessage();
+        //String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //dbRef = FirebaseDatabase.getInstance().getReference("Users")
+        //        .child(userId);
+        //welcomeMessage();
     }
+
     public void btnLogOutClick(View view){
         startActivity(new Intent(Home.this, MainActivity.class));
     }
-
+    /*
     public void welcomeMessage() {
         dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -52,4 +53,6 @@ public class Home extends AppCompatActivity {
     public void logout() {
         FirebaseAuth.getInstance().signOut();
     }
+
+     */
 }

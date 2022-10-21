@@ -37,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 
 import org.w3c.dom.Text;
 
+import java.util.UUID;
+
 
 public class CookSignUp extends AppCompatActivity {
 
@@ -55,8 +57,9 @@ public class CookSignUp extends AppCompatActivity {
 
     Uri imageURI;
 
-    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Image");
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
+    private VoidCheck_Class voidCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class CookSignUp extends AppCompatActivity {
         setContentView(R.layout.activity_cook_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Image");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         firstNameField = (EditText) findViewById(R.id.firstNameField2);
         lastNameField = (EditText) findViewById(R.id.lastNameField2);
@@ -84,13 +90,16 @@ public class CookSignUp extends AppCompatActivity {
     }
 
     public void btnCookToHome(View view) {
-        //uploadImage();
+
+
         registerUser();
 
         if (isAcceptable) {
 
             startActivity(new Intent(CookSignUp.this, Home.class));
         }
+
+
 
     }
 
@@ -131,6 +140,7 @@ public class CookSignUp extends AppCompatActivity {
         isAcceptable = true;
         Verification_Class verify = new Verification_Class();
 
+        /*
         String voidChequeError = verify.checkVoidCheque(imageURI);
         if (voidChequeError != "") {
             lblVoidCheque.setError(voidChequeError);
@@ -138,29 +148,35 @@ public class CookSignUp extends AppCompatActivity {
             //isAcceptable = false;
         }
 
-        if (isAcceptable) {
-            StorageReference storageRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(imageURI));
-            storageRef.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+         */
+
+
+        if (imageURI != null) {
+            StorageReference imageRef = storageReference.child("images/" + UUID.randomUUID().toString());
+
+            imageRef.putFile(imageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    Toast.makeText(CookSignUp.this, "Image successfully uploaded to database.", Toast.LENGTH_SHORT).show();
+                    imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            VoidCheck_Class voidCheck = new VoidCheck_Class(uri.toString());
-                            String voidCheckId = databaseReference.push().getKey();
-                            databaseReference.child(voidCheckId).setValue(voidCheck);
-
-                            Toast.makeText(CookSignUp.this, "Image successfully uploaded to database.", Toast.LENGTH_SHORT).show();
+                            voidCheck = new VoidCheck_Class(uri.toString());
+                            Toast.makeText(CookSignUp.this, voidCheck.getImageURL(), Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(CookSignUp.this, "Image upload to database failed.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CookSignUp.this, "Image failed to upload to database.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+
+
+
+
     }
 
     public String getFileExtension(Uri imgUri) {
@@ -185,6 +201,7 @@ public class CookSignUp extends AppCompatActivity {
         String postalCode = postalCodeField.getText().toString().trim();
         String country = countryField.getText().toString().trim();
         String description = descriptionField.getText().toString().trim();
+
 
         Verification_Class verify = new Verification_Class();
 
@@ -260,11 +277,14 @@ public class CookSignUp extends AppCompatActivity {
 
 
         if (isAcceptable) {
+            uploadImage();
+
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", "imageURL", description);
+                        Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", voidCheck.getImageURL(), description);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getUid())
@@ -273,15 +293,15 @@ public class CookSignUp extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
 
                                         if (task.isSuccessful()) {
-                                            Toast.makeText(CookSignUp.this, "User has successfully been registered!", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(CookSignUp.this, "User has successfully been registered!", Toast.LENGTH_LONG).show();
                                         } else {
-                                            Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
 
                     } else {
-                        Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
                     }
                 }
             });
