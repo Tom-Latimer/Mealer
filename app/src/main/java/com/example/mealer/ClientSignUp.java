@@ -20,13 +20,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class ClientSignUp extends AppCompatActivity implements OnClickListener {
 
-    private AppCompatButton signUpButtonClient;
+    private AppCompatButton signUpButtonClient, backButton;
 
     private EditText firstNameField, lastNameField, emailField,
             passwordField, creditCardNumberField, securityCodeField,
-            expirationDateField;
+            expirationDateField, addressField, unitField;
 
     private FirebaseAuth mAuth;
+
+    boolean isAcceptable = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,14 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
         creditCardNumberField = (EditText) findViewById(R.id.creditCardNumberField);
         securityCodeField = (EditText) findViewById(R.id.securityCodeField);
         expirationDateField = (EditText) findViewById(R.id.expirationDateField);
+        addressField = (EditText) findViewById(R.id.addressInputField);
+        unitField = (EditText) findViewById(R.id.unitInputField);
 
         signUpButtonClient = (AppCompatButton) findViewById(R.id.signUpButtonClient);
         signUpButtonClient.setOnClickListener(this);
+
+        backButton = (AppCompatButton) findViewById(R.id.bckButtonClient);
+        backButton.setOnClickListener(this);
 
     }
 
@@ -53,12 +60,18 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
         switch (view.getId()) {
             case R.id.signUpButtonClient:
                 registerUser();
+                if (isAcceptable){
+                    startActivity(new Intent(ClientSignUp.this, Home.class));
+                }
+                break;
+            case R.id.bckButtonClient:
+                startActivity(new Intent(ClientSignUp.this, MainActivity.class));
                 break;
         }
     }
 
     private void registerUser() {
-        boolean isAcceptable = true;
+
 
         String firstName = firstNameField.getText().toString().trim();
         String lastName = lastNameField.getText().toString().trim();
@@ -67,53 +80,69 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
         String ccNumber = creditCardNumberField.getText().toString().trim();
         String securityCode = securityCodeField.getText().toString().trim();
         String expirationDate = expirationDateField.getText().toString().trim();
+        String address = addressField.getText().toString().trim();
+        String unitNumber = unitField.getText().toString().trim();
 
         Verification_Class verify = new Verification_Class();
 
         String firstNameError = verify.checkFirstName(firstName);
-        if (firstNameError != "") {
+        if (!firstNameError.equals("")) {
             firstNameField.setError(firstNameError);
             firstNameField.requestFocus();
             isAcceptable = false;
         }
 
         String lastNameError = verify.checkLastName(lastName);
-        if (lastNameError != "") {
+        if (!lastNameError.equals("")) {
             lastNameField.setError(lastNameError);
             lastNameField.requestFocus();
             isAcceptable = false;
         }
 
         String passwordError = verify.checkPassword(password);
-        if (passwordError != "") {
+        if (!passwordError.equals("")) {
             passwordField.setError(passwordError);
             passwordField.requestFocus();
             isAcceptable = false;
         }
 
+        String addressError = verify.checkAddress(address);
+        if (!addressError.equals("")) {
+            addressField.setError(addressError);
+            addressField.requestFocus();
+            isAcceptable = false;
+        }
+
+        String unitError = verify.checkUnitNum(unitNumber);
+        if (!unitError.equals("")) {
+            unitField.setError(unitError);
+            unitField.requestFocus();
+            isAcceptable = false;
+        }
+
         String emailError = verify.checkEmail(email);
-        if (emailError != "") {
+        if (!emailError.equals("")) {
             emailField.setError(emailError);
             emailField.requestFocus();
             isAcceptable = false;
         }
 
         String ccNumberError = verify.checkCCNumber(ccNumber);
-        if (ccNumberError != "") {
+        if (!ccNumberError.equals("")) {
             creditCardNumberField.setError(ccNumberError);
             creditCardNumberField.requestFocus();
             isAcceptable = false;
         }
 
         String securityCodeError = verify.checkSecurityCode(securityCode);
-        if (securityCodeError != "") {
+        if (!securityCodeError.equals("")) {
             securityCodeField.setError(securityCodeError);
             securityCodeField.requestFocus();
             isAcceptable = false;
         }
 
         String expirationDateError = verify.checkExpirationDate(expirationDate);
-        if (expirationDateError != "") {
+        if (!expirationDateError.equals("")) {
             expirationDateField.setError(expirationDateError);
             expirationDateField.requestFocus();
             isAcceptable = false;
@@ -125,7 +154,7 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Client_Class client = new Client_Class(firstName,lastName,email,password,
-                                "TEMP","TYPE",expirationDate+securityCode+ccNumber);
+                                address+unitNumber,"CLIENT",expirationDate+securityCode+ccNumber);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getUid())
@@ -147,7 +176,5 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
                 }
             });
         }
-
-
     }
 }
