@@ -75,7 +75,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/btn_SignIn"
+            android:id="@+id/SignIn_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btn_SignIn"
