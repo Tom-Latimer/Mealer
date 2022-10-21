@@ -1,12 +1,18 @@
 package com.example.mealer;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CookSignUp extends AppCompatActivity {
 
+    private static final int SELECT_PICTURE = 1;
     private AppCompatButton signUpButtonCook;
 
     private EditText firstNameField, lastNameField, emailField,
@@ -69,31 +76,31 @@ public class CookSignUp extends AppCompatActivity {
 
     }
 
-    //protected void ChooseImageBtn(View view){
-    //    Intent chooseVoidCheckPhoto = new Intent();
-    //    chooseVoidCheckPhoto.setType("image/*");
-    //    chooseVoidCheckPhoto.setAction(Intent.ACTION_GET_CONTENT);
-    //    startActivityForResult(Intent.createChooser(chooseVoidCheckPhoto, "Select Picture"), SELECT_PICTURE);
-    //}
+    public void ChooseImageBtn(View view){
+        Intent chooseVoidCheckPhoto = new Intent();
+        chooseVoidCheckPhoto.setType("image/*");
+        chooseVoidCheckPhoto.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(chooseVoidCheckPhoto, "Select Picture"), SELECT_PICTURE);
+    }
 
-    //protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    //    super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            switch (requestCode) {
 
-    //    if (resultCode == RESULT_OK) {
-    //        if (requestCode == SELECT_PICTURE) {
-    //            Uri photoURI = data.getData();
-    //            if (photoURI != null) {
-    //                 imgCheque.setImageURI(photoURI);
-    //            }
-    //        }
-    //    }
-    //}
-
-
-
-
-
-
+                case SELECT_PICTURE:
+                    if (resultCode == Activity.RESULT_OK) {
+                        //data gives you the image uri. Try to convert that to bitmap
+                        break;
+                    } else if (resultCode == Activity.RESULT_CANCELED) {
+                        Log.e(TAG, "Selecting picture cancelled");
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in onActivityResult : " + e.getMessage());
+        }
+    }
 
     //@Override
     //public void onClick(View view) {
