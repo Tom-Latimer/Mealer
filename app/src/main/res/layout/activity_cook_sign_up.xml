@@ -190,6 +190,7 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="17dp"
                     android:paddingBottom="10dp"
+                    android:textAllCaps="true"
                     android:textColorHint="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -223,7 +224,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="15dp"
@@ -244,7 +245,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayoutCheque"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="200dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -256,9 +257,8 @@
                     <ImageView
                         android:id="@+id/imgCheque"
                         android:layout_width="180dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        tools:srcCompat="@android:drawable/ic_menu_help" />
+                        android:layout_height="200dp"
+                        android:layout_weight="1" />
 
                     <ImageView
                         android:id="@+id/btnChooseImage"
@@ -285,11 +285,12 @@
                 android:hint="Description of Yourself"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
-                android:minHeight="48dp"
+                android:minHeight="100dp"
                 android:paddingStart="17dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="17dp"
                 android:paddingBottom="10dp"
+                android:textAllCaps="false"
                 android:textColorHint="@color/black"
                 android:textSize="20sp" />
 

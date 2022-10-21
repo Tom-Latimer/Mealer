@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -31,15 +32,15 @@ public class CookSignUp extends AppCompatActivity {
 
     private EditText firstNameField, lastNameField, emailField,
             passwordField, addressField, unitField, postalCodeField,
-            countryField, imgCheque, descriptionField;
+            countryField, descriptionField;
+    private ImageView imgCheque;
 
     private FirebaseAuth mAuth;
 
     private boolean isAcceptable = true;
 
+    Uri imageURI;
 
-    //int SELECT_PICTURE = 100;
-    //ImageView imgCheque;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class CookSignUp extends AppCompatActivity {
         unitField = (EditText) findViewById(R.id.unitField);
         postalCodeField = (EditText) findViewById(R.id.postalCodeField);
         countryField = (EditText) findViewById(R.id.countryField);
-        //////imgCheque = (EditText) findViewById(R.id.imgCheque);
+        imgCheque = (ImageView) findViewById(R.id.imgCheque);
         descriptionField = (EditText) findViewById(R.id.descriptionField);
 
         //signUpButtonCook = (AppCompatButton) findViewById(R.id.signUpButtonCook);
@@ -70,7 +71,7 @@ public class CookSignUp extends AppCompatActivity {
     public void btnCookToHome(View view){
         registerUser();
 
-        if (isAcceptable == true){
+        if (isAcceptable){
             startActivity(new Intent(CookSignUp.this, Home.class));
         }
 
@@ -91,6 +92,12 @@ public class CookSignUp extends AppCompatActivity {
                 case SELECT_PICTURE:
                     if (resultCode == Activity.RESULT_OK) {
                         //data gives you the image uri. Try to convert that to bitmap
+
+
+                        //changes annika
+                        imageURI = data.getData();
+                        imgCheque.setImageURI(imageURI);
+                        //end of changes annika
                         break;
                     } else if (resultCode == Activity.RESULT_CANCELED) {
                         Log.e(TAG, "Selecting picture cancelled");
@@ -102,17 +109,10 @@ public class CookSignUp extends AppCompatActivity {
         }
     }
 
-    //@Override
-    //public void onClick(View view) {
-    //    switch (view.getId()) {
-    //        case R.id.signUpButtonCook:
-    //            registerUser();
-    //            break;
-    //    }
-    //}
 
     private void registerUser() {
 
+        isAcceptable = true;
 
         String firstName = firstNameField.getText().toString().trim();
         String lastName = lastNameField.getText().toString().trim();
@@ -122,7 +122,7 @@ public class CookSignUp extends AppCompatActivity {
         String unitNum = unitField.getText().toString().trim();
         String postalCode = postalCodeField.getText().toString().trim();
         String country = countryField.getText().toString().trim();
-        //String voidCheque = imgCheque.getText().toString().trim();
+        //Drawable voidChequeDrawable = imgCheque.getDrawable();
         String description = descriptionField.getText().toString().trim();
 
         Verification_Class verify = new Verification_Class();
@@ -202,7 +202,7 @@ public class CookSignUp extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Cook_Class cook = new Cook_Class(firstName , lastName, email , password ,  address , "Cook" , "voidCheque" , description);
+                        Cook_Class cook = new Cook_Class(firstName , lastName, email , password ,  address , "COOK" , imageURI , description);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getUid())

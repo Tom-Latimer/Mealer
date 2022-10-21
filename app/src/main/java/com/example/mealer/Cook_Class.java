@@ -1,22 +1,24 @@
 package com.example.mealer;
 
+import android.net.Uri;
+
 public class Cook_Class extends User_Class {
-    private String void_check; //needs to be a picture, not sure how to store that yet
+    private Uri void_check; //needs to be a picture, not sure how to store that yet
     private String description;
 
 
-    public Cook_Class(String name , String last_name, String email , String password ,  String address , String type , String void_check , String description){
+    public Cook_Class(String name , String last_name, String email , String password , String address , String type , Uri void_check , String description){
         super(name , last_name, email , password ,  address , type );
         set_void_check(void_check);
         set_description(description);
     }
-    private String get_void_check(){
+    private Uri get_void_check(){
         return void_check;
     }
     private String get_description(){
         return description;
     }
-    private void set_void_check(String void_check){
+    private void set_void_check(Uri void_check){
         this.void_check = void_check;
     }
     private void set_description(String description){
