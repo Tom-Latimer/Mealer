@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,12 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+<<<<<<< HEAD:app/src/main/java/com/example/mealer/Home.java
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+=======
+>>>>>>> 30719a815c12d0c72a237455a1d1a1366fecad49:app/src/main/java/com/example/mealer/HomeClient.java
 
-import org.w3c.dom.Text;
-
-public class Home extends AppCompatActivity {
+public class HomeClient extends AppCompatActivity {
 
     private DatabaseReference dbRef;
     private FirebaseAuth mAuth;
@@ -29,7 +29,7 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_client);
 
         /*
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -59,7 +59,7 @@ public class Home extends AppCompatActivity {
         });
     }
     public void btnLogOutClick(View view){
-        startActivity(new Intent(Home.this, MainActivity.class));
+        startActivity(new Intent(HomeClient.this, MainActivity.class));
 
             FirebaseAuth.getInstance().signOut();
     }
