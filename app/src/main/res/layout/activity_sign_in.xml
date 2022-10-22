@@ -67,7 +67,7 @@
             android:background="@drawable/edit_text_background"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
             android:minHeight="48dp"
             android:paddingStart="20dp"
             android:paddingTop="8dp"

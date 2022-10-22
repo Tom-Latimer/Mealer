@@ -89,7 +89,7 @@ public class CookSignUp extends AppCompatActivity {
 
         if (isAcceptable) {
 
-            startActivity(new Intent(CookSignUp.this, Home.class));
+            startActivity(new Intent(CookSignUp.this, HomeCook.class));
         }
 
     }

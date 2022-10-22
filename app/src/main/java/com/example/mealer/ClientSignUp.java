@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -61,7 +60,7 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
             case R.id.signUpButtonClient:
                 registerUser();
                 if (isAcceptable){
-                    startActivity(new Intent(ClientSignUp.this, Home.class));
+                    startActivity(new Intent(ClientSignUp.this, HomeClient.class));
                 }
                 break;
             case R.id.bckButtonClient:
