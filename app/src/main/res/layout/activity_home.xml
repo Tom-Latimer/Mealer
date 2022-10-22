@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:background="#283267"
             android:onClick="btnLogOutClick"
-            android:text="Log Out"
+            android:text="@string/log_out"
             app:icon="@android:drawable/btn_star" />
 
         <Space
@@ -40,7 +40,7 @@
             android:layout_marginEnd="90dp"
             android:background="#857A7A"
             android:fontFamily="sans-serif-black"
-            android:text=" Welcome!"
+            android:text="@string/welcome"
             android:textColor="@color/black"
             android:textSize="40sp" />
 
@@ -66,6 +66,7 @@
         android:id="@+id/cookPhotoHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/cook"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
