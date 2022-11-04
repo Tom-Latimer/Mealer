@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class ComplaintList extends ArrayAdapter<Complaint> {
         TextView txtClientComplaint2 = (TextView) listViewItem.findViewById(R.id.txtClientComplaint2);
 
         Complaint complaint = complaints.get(position);
-        txtComplaintName2.setText(complaint.getComplaintId());
+        String complaintName = "Complaint ID: " + complaint.getComplaintId();
+        txtComplaintName2.setText(complaintName);
         txtClientComplaint2.setText(String.valueOf(complaint.getComplaintMessage()));
         return listViewItem;
     }

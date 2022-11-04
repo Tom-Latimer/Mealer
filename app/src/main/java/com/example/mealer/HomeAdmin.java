@@ -98,7 +98,8 @@ public class HomeAdmin extends AppCompatActivity {
         final Button btnPermanentSuspension = (Button) dialogView.findViewById(R.id.btnPermanentSuspension);
         final Button btnTempSuspension = (Button) dialogView.findViewById(R.id.btnTempSuspension);
 
-        dialogBuilder.setTitle("Complaint ID: " + complaintId);
+        String title = "Complaint ID: " + complaintId;
+        dialogBuilder.setTitle(title);
         txtComplaint.setText(complaint);
 
         final AlertDialog builder = dialogBuilder.create();
@@ -107,7 +108,6 @@ public class HomeAdmin extends AppCompatActivity {
         buttonDismissComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 dismissComplaint(complaintId);
                 builder.dismiss();
             }
@@ -137,7 +137,7 @@ public class HomeAdmin extends AppCompatActivity {
 
     private boolean dismissComplaint(String id) {
 
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("complaints").child(id);
+        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
 
         dR.removeValue();
         Toast.makeText(getApplicationContext(), "Complaint Dismissed", Toast.LENGTH_LONG).show();
@@ -148,7 +148,7 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("complaints").child(id);
+        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
 
         //add code to set cook as suspended in database here
         //
@@ -169,7 +169,7 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("complaints").child(id);
+        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
 
         //add code to set cook as suspended in database here
         //

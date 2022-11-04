@@ -25,4 +25,5 @@
     <string name="suspendCookPermanent">Permanent Suspension</string>
     <string name="tempSuspension">Temporary Suspension</string>
     <string name="suspensionLength">Length of suspension (days)</string>
+    <string name="dismiss3">Dismiss Complaint</string>
 </resources>

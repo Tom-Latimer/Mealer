@@ -11,9 +11,9 @@ public class Complaint {
 
     }
 
-    public Complaint(String id, String complaint, String date, String recipient){
+    public Complaint(String id, String message, String date, String recipient){
         _complaintId = id;
-        _complaintMessage = complaint;
+        _complaintMessage = message;
         _complaintDate = date;
         _complaintRecipient = recipient;
     }
