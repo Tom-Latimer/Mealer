@@ -17,4 +17,12 @@
     <string name="welcome_message_slogan">Join the community</string>
     <string name="log_out">Log Out</string>
     <string name="welcome">Welcome!</string>
+    <string name="clientComplaint">Client Complaint:</string>
+    <string name="clientComplaints">Client Complaints:</string>
+    <string name="suspend">Suspend Cook</string>
+    <string name="dismiss">Dismiss Complaint</string>
+    <string name="dismiss2">Dismiss</string>
+    <string name="suspendCookPermanent">Permanent Suspension</string>
+    <string name="tempSuspension">Temporary Suspension</string>
+    <string name="suspensionLength">Length of suspension (days)</string>
 </resources>
