@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -121,18 +122,13 @@ public class HomeAdmin extends AppCompatActivity {
             }
         });
 
-        btnPermanentSuspension.setOnClickListener(new View.OnClickListener() {
+        btnTempSuspension.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //add something to get suspensionEndDate here
-                //
-                //
-                //
-                //temp date:
-                String suspensionEndDate = "2022-12-01";
+                final EditText txtSuspensionLength  = (EditText) dialogView.findViewById(R.id.txtSuspensionLength);
 
-                tempSuspendCook(complaintId, suspensionEndDate);
+                tempSuspendCook(complaintId, String.valueOf(txtSuspensionLength.getText()));
                 builder.dismiss();
             }
         });
@@ -169,7 +165,7 @@ public class HomeAdmin extends AppCompatActivity {
         //
     }
 
-    private void tempSuspendCook(String id, String endDate) {
+    private void tempSuspendCook(String id, String suspensionLength) {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
