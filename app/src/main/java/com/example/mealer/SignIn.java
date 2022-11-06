@@ -62,7 +62,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
             public void onComplete(@NonNull Task<AuthResult> task) {//login function
                 if(task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    startActivity(new Intent(SignIn.this, HomeAdmin.class));
+                    startActivity(new Intent(SignIn.this, HomeClient.class));
                 }
                 else{
                     Toast.makeText(SignIn.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();

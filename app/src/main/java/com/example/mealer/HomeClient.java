@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeClient extends AppCompatActivity {
 
@@ -23,13 +24,13 @@ public class HomeClient extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_client);
 
-        /*
+
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
                 .child(userId);
         welcomeMessage();
 
-         */
+
     }
 
     public void btnLogOutClick(View view) {
@@ -39,15 +40,15 @@ public class HomeClient extends AppCompatActivity {
     }
 
 
-    public void welcomeMessage(View view) {
+    public void welcomeMessage() {
         dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    User_Class user = (User_Class) task.getResult().getValue();
-                    String type = user.get_type();
-                    TextView greetingText = (TextView) findViewById(R.id.greetingtxt);
-                    greetingText.setText("You are logged in as " + type);
+                      DataSnapshot snapshot = task.getResult();
+                        String name = snapshot.child("_name").getValue().toString();
+                        TextView welcome = findViewById(R.id.greetingtxt);
+                        welcome.setText("Welcome " + name);
 
                 }
             }
