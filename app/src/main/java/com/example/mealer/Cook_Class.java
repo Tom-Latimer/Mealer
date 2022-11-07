@@ -11,6 +11,10 @@ public class Cook_Class extends User_Class {
     private boolean suspended;
     private String suspensionDate;
 
+    public Cook_Class(){
+
+    }
+
     public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description){
         super(first_name , last_name, email , password ,  address , type);
         set_postal_code(postalCode);

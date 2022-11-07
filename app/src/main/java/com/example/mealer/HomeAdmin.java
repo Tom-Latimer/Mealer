@@ -148,24 +148,12 @@ public class HomeAdmin extends AppCompatActivity {
 
     private void permanentSuspendCook(String id) {
 
-        String cookid="";
-        for (int i=0; i<complaints.size(); i++){
-            if ((complaints.get(i).getComplaintId())==id){
-                cookid=(complaints.get(i).getComplaintRecipient());
-
-            }
-        }
-
-        DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookid).child("_suspended");
+        String cookId =  FirebaseDatabase.getInstance().getReference("Complaints").child(id).toString();
+        DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookId).child("_suspended");
         dR.setValue(true);
 
         Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
 
-        //add code to remove complaint from list on admin home page
-        //
-        //
-        //
-        //
     }
 
     private void tempSuspendCook(String id, String suspensionLength) {
@@ -193,7 +181,7 @@ public class HomeAdmin extends AppCompatActivity {
         }
 
         DatabaseReference ab =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspended");
-        dR.setValue(true);
+        ab.setValue(true);
 
         DatabaseReference cd =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspensionDate");
 
@@ -205,10 +193,5 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
 
-        //add code to remove complaint from list on admin home page
-        //
-        //
-        //
-        //
     }
 }
