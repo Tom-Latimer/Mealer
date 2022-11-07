@@ -20,7 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeAdmin extends AppCompatActivity {
@@ -171,12 +173,38 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
+        // check if suspension length edittext is empty/not a number
+        EditText SuspensionLength = (EditText) findViewById(R.id.txtSuspensionLength);
+        String txtSuspensionLength = SuspensionLength.getText().toString().trim();
+
+        Verification_Class verify = new Verification_Class();
+
+        String suspensionLengthError = verify.checkSuspensionLength(suspensionLength);
+        if (suspensionLengthError != "") {
+            SuspensionLength.setError(suspensionLengthError);
+            SuspensionLength.requestFocus();
+        }
+
         DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
 
-        //add code to set cook as suspended in database here
-        //
-        //
-        //
+        String cookID ="";
+        for (int i=0; i<complaints.size(); i++){
+            if ((complaints.get(i).getComplaintId())==id){
+                cookID = (complaints.get(i).getComplaintRecipient());
+
+            }
+        }
+
+        DatabaseReference ab =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspended");
+        dR.setValue(true);
+
+        DatabaseReference cd =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspensionDate");
+
+        int numSuspensionLength = Integer.parseInt(txtSuspensionLength);
+        Date suspensionDate = new Date(new Date().getTime() + (numSuspensionLength * 24*60*60*1000));
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        String strSuspensionDate = sdfDate.format(suspensionDate);
+        dR.setValue(strSuspensionDate);
 
         Toast.makeText(getApplicationContext(), "Cook Suspended", Toast.LENGTH_LONG).show();
 

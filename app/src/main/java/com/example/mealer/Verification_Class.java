@@ -134,4 +134,17 @@ public class Verification_Class {
         }
         return error;
     }
+
+    public String checkSuspensionLength(String suspensionLength){
+        String error = "";
+        if(suspensionLength.isEmpty()){
+            error = "Suspension length required";
+        }
+        try{
+            Integer.parseInt(suspensionLength);
+        }catch(NumberFormatException e){
+            error = "Please enter a valid suspension length (number)";
+        }
+        return error;
+    }
 }
