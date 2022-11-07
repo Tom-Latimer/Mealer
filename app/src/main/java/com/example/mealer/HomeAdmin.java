@@ -148,8 +148,6 @@ public class HomeAdmin extends AppCompatActivity {
 
     private void permanentSuspendCook(String id) {
 
-        Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
-
         String cookid="";
         for (int i=0; i<complaints.size(); i++){
             if ((complaints.get(i).getComplaintId())==id){
@@ -161,6 +159,7 @@ public class HomeAdmin extends AppCompatActivity {
         DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookid).child("_suspended");
         dR.setValue(true);
 
+        Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
 
         //add code to remove complaint from list on admin home page
         //
@@ -170,8 +169,6 @@ public class HomeAdmin extends AppCompatActivity {
     }
 
     private void tempSuspendCook(String id, String suspensionLength) {
-
-        Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
         // check if suspension length edittext is empty/not a number
         EditText SuspensionLength = (EditText) findViewById(R.id.txtSuspensionLength);
@@ -206,8 +203,7 @@ public class HomeAdmin extends AppCompatActivity {
         String strSuspensionDate = sdfDate.format(suspensionDate);
         dR.setValue(strSuspensionDate);
 
-        Toast.makeText(getApplicationContext(), "Cook Suspended", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
 
         //add code to remove complaint from list on admin home page
         //
