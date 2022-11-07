@@ -34,4 +34,6 @@ public class Complaint {
         return _complaintMessage;
     }
 
+    public String getComplaintRecipient(){return _complaintRecipient;}
+
 }

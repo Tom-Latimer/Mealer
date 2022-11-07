@@ -148,16 +148,16 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
-        //DatabaseReference iD = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaint").child(id).child("cookId");
-        //DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference(iD).child(id).child("cookId");
-    //iD.setValue(true);
+        String cookid="";
+        for (int i=0; i<complaints.size(); i++){
+            if ((complaints.get(i).getComplaintId())==id){
+                cookid=(complaints.get(i).getComplaintRecipient());
 
-        //add code to set cook as suspended in database here
-        //
-        //
-        //
+            }
+        }
 
-        Toast.makeText(getApplicationContext(), "Cook Suspended", Toast.LENGTH_LONG).show();
+        DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookid).child("_suspended");
+        dR.setValue(true);
 
 
         //add code to remove complaint from list on admin home page
