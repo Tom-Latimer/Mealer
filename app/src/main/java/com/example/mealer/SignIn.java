@@ -82,6 +82,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             User_Class currUser = (User_Class) snapshot.getValue(User_Class.class);
                             String type = currUser.get_type();
 
+
                              Intent homeIntent = new Intent();
 
                             if (type.equals("ADMIN")) {
@@ -89,7 +90,15 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                             } else if (type.equals("CLIENT")) {
                                 homeIntent = new Intent(SignIn.this, HomeClient.class);
                             } else if (type.equals("COOK")) {
-                                homeIntent = new Intent(SignIn.this, HomeCook.class);
+                                Cook_Class cookClass=(Cook_Class) snapshot.getValue(Cook_Class.class);
+                                Boolean isSuspended=cookClass.get_suspended();
+                                if(isSuspended==false) {
+                                    homeIntent = new Intent(SignIn.this, HomeCook.class);
+                                }
+                                else{
+                                    homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+
+                            }
                             }
                             startActivity(homeIntent);
                         }

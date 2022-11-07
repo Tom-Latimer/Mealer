@@ -31,7 +31,7 @@ public class Cook_Class extends User_Class {
     public String get_country() { return country; }
     public String get_unit_num() { return unitNum; }
     public boolean get_suspended(){ return suspended; }
-    public String get_SuspensionDate(){ return suspensionDate}
+    public String get_SuspensionDate(){ return suspensionDate;}
     public void set_postal_code(String postalCode) { this.postalCode = postalCode; }
     public void set_country(String country) { this.country = country; }
     public void set_unit_num(String unitNum) { this.unitNum = unitNum; }

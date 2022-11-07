@@ -186,6 +186,7 @@ public class CookSignUp extends AppCompatActivity {
         String country = countryField.getText().toString().trim();
         String description = descriptionField.getText().toString().trim();
 
+
         Verification_Class verify = new Verification_Class();
 
         String firstNameError = verify.checkFirstName(firstName);
