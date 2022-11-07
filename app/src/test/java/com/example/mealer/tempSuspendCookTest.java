@@ -52,7 +52,7 @@ public class tempSuspendCookTest {
         //get cook after suspension
         Cook_Class suspendedCook = getCook(id);
         boolean actual = suspendedCook.get_suspended();
-        String actualDate = suspendedCook.get_SuspensionDate();
+        String actualDate = suspendedCook.get_suspension_date();
 
         assertEquals("Cook was Successfully suspended",expected,actual);
         assertEquals("Correct suspension time was administered", expectedSuspensionDate, actualDate);
