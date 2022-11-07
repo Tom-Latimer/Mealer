@@ -148,9 +148,9 @@ public class HomeAdmin extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), "NOT IMPLEMENTED YET", Toast.LENGTH_LONG).show();
 
-        DatabaseReference iD = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaint").child(id).child("cookId");
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference(iD).child(id).child("cookId");
-    iD.setValue(true);
+        //DatabaseReference iD = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaint").child(id).child("cookId");
+        //DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference(iD).child(id).child("cookId");
+    //iD.setValue(true);
 
         //add code to set cook as suspended in database here
         //
