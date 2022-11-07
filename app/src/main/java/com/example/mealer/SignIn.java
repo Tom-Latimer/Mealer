@@ -23,6 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class SignIn extends AppCompatActivity implements View.OnClickListener {
     private EditText edittxt_email, edittxt_password;
     private Button btn_SignIn;
@@ -96,7 +101,26 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                     homeIntent = new Intent(SignIn.this, HomeCook.class);
                                 }
                                 else{
-                                    homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+                                    String strSuspensionDate = cookClass.get_suspension_date();
+                                    if(strSuspensionDate == ""){
+                                        homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+                                    }else{
+                                        Date currentDate = new Date();
+                                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                        Date suspensionDate = null;
+                                        try {
+                                            suspensionDate = formatter.parse(strSuspensionDate);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if(currentDate.compareTo(suspensionDate) >= 0) {
+                                            // not suspended anymore
+                                            cookClass.set_suspended(false);
+                                            homeIntent = new Intent(SignIn.this, HomeClient.class);
+                                        } else{
+                                            homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+                                        }
+                                    }
 
                             }
                             }
