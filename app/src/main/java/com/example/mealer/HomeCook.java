@@ -20,5 +20,6 @@ public class HomeCook extends AppCompatActivity {
         startActivity(new Intent(HomeCook.this, MainActivity.class));
 
         FirebaseAuth.getInstance().signOut();
+        //finish();
     }
 }

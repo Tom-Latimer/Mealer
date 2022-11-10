@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -59,12 +60,10 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
         switch (view.getId()) {
             case R.id.signUpButtonClient:
                 registerUser();
-                if (isAcceptable){
-                    startActivity(new Intent(ClientSignUp.this, HomeClient.class));
-                }
                 break;
             case R.id.bckButtonClient:
                 startActivity(new Intent(ClientSignUp.this, MainActivity.class));
+                //finish();
                 break;
         }
     }
@@ -163,14 +162,18 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
 
                                         if (task.isSuccessful()) {
                                             Toast.makeText(ClientSignUp.this,"User has successfully been registered!",Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(ClientSignUp.this, HomeClient.class));
+                                            //finish();
                                         } else {
                                             Toast.makeText(ClientSignUp.this,"Failed to register!",Toast.LENGTH_LONG).show();
+                                            System.out.println(task.getException().getMessage());
                                         }
                                     }
                                 });
 
                     } else {
                         Toast.makeText(ClientSignUp.this,"Failed to register!",Toast.LENGTH_LONG).show();
+                        System.out.println(task.getException().getMessage());
                     }
                 }
             });
