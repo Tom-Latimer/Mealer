@@ -36,4 +36,6 @@ public class Complaint {
 
     public String getComplaintRecipient(){return _complaintRecipient;}
 
+    public void setComplaintRecipient(String recipient) {_complaintRecipient = recipient; }
+
 }

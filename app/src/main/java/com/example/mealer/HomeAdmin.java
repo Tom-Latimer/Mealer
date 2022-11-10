@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -147,12 +148,36 @@ public class HomeAdmin extends AppCompatActivity {
     }
 
     private void permanentSuspendCook(String id) {
+        DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
+        complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Complaint complaint = (Complaint) snapshot.getValue(Complaint.class);
+                DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(complaint.getComplaintRecipient());
 
-        String cookId =  FirebaseDatabase.getInstance().getReference("Complaints").child(id).toString();
-        DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookId).child("_suspended");
-        dR.setValue(true);
+                dR.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
+                        suspendedCook.set_suspended(true);
+                        dR.setValue(suspendedCook);
+                    }
 
-        Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("TAG",error.getMessage());
+                    }
+                });
+
+                Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TAG",error.getMessage());
+            }
+        });
+
 
     }
 
