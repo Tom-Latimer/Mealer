@@ -87,10 +87,7 @@ public class CookSignUp extends AppCompatActivity {
         //uploadImage();
         registerUser();
 
-        if (isAcceptable) {
 
-            startActivity(new Intent(CookSignUp.this, HomeCook.class));
-        }
 
     }
 
@@ -275,6 +272,7 @@ public class CookSignUp extends AppCompatActivity {
 
                                         if (task.isSuccessful()) {
                                             Toast.makeText(CookSignUp.this, "User has successfully been registered!", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(CookSignUp.this, HomeCook.class));
                                         } else {
                                             Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();
                                         }
