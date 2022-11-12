@@ -2,7 +2,10 @@ package com.example.mealer;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+
 public class Cook_Class extends User_Class {
+    private ArrayList<Meal_Class> meals;
     private String description;
     private String postalCode;
     private String country;
@@ -47,13 +50,17 @@ public class Cook_Class extends User_Class {
     public void set_suspension_date(String suspensionDate){this.suspensionDate = suspensionDate;}
     public void create_meal(String name, String description, String price, String Meal_type, String Cuisine_type, String[] ingredients, String[] allergens){
         Meal_Class meal = new Meal_Class(name, description, price, Meal_type, Cuisine_type, ingredients, allergens);
+        add_meal(meal);
+    }
+    public void delete_meal(Meal_Class meal){
+        meals.remove(meal);
+    }
+    public void edit_meal(Meal_Class meal, int i){
+        meals.set(i, meal);
 
     }
-    private void delete_meal(Meal_Class meal){
-
-    }
-    private void edit_meal(){
-
+    public void add_meal(Meal_Class meal){
+        meals.add(meal);
     }
 
 }
