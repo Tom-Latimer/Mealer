@@ -1,6 +1,7 @@
 package com.example.mealer;
 
 public class Meal_Class {
+    String mealID;
     private String name;
     private String description;
     private String price;
@@ -62,6 +63,8 @@ public class Meal_Class {
     public String get_price() {
         return price;
     }
+
+    public String get_Id(){return mealID;}
 
     public String get_Meal_type() {
         return Meal_type;
