@@ -60,6 +60,15 @@
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
+        <Button
+            android:id="@+id/MenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onMenuClick"
+            android:text="Your Menu"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:iconTint="#FFFFFF" />
+
     </LinearLayout>
 
     <ImageView

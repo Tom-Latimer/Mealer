@@ -14,12 +14,20 @@ public class HomeCook extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_cook);
+
     }
 
     public void btnLogOutClick(View view){
         startActivity(new Intent(HomeCook.this, MainActivity.class));
 
         FirebaseAuth.getInstance().signOut();
+        //finish();
+    }
+    public void onMenuClick
+            (View view){
+        startActivity(new Intent(HomeCook.this, Menu.class));
+
+
         //finish();
     }
 }
