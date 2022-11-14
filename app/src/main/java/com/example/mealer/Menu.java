@@ -3,6 +3,7 @@ package com.example.mealer;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -43,6 +45,17 @@ public class Menu extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public void btnLogOutClick(View view){
+        startActivity(new Intent(Menu.this, MainActivity.class));
+
+        FirebaseAuth.getInstance().signOut();
+    }
+
+    public void btnAddMealClick(View view){
+        startActivity(new Intent(Menu.this, MainActivity.class));
+
     }
 
 
@@ -87,5 +100,5 @@ public class Menu extends AppCompatActivity {
     }
 
 
-    }
+
 }

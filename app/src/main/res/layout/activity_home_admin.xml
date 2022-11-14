@@ -28,7 +28,7 @@
                 android:background="@drawable/button_background"
                 android:onClick="btnLogOutClick"
                 android:text="@string/log_out"
-                app:icon="@android:drawable/btn_star" />
+                app:icon="@drawable/ic_logout_icon" />
 
             <Space
                 android:layout_width="match_parent"

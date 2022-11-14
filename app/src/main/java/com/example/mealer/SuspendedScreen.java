@@ -20,5 +20,6 @@ public class SuspendedScreen extends AppCompatActivity {
         startActivity(new Intent(SuspendedScreen.this, MainActivity.class));
 
         FirebaseAuth.getInstance().signOut();
+
     }
 }
