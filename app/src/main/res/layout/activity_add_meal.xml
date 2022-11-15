@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    tools:context=".Menu">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnLogOff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/button_background"
+                        android:onClick="btnBackClick"
+                        android:text="Back" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Meal"
+                    android:textAlignment="center"
+                    android:textSize="34sp"
+                    android:textStyle="bold|italic" />
+
+                <EditText
+                    android:id="@+id/mealName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_meal_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Meal Name"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/mealType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_meal_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Meal Type (Main dish, desert, etc.)"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/cuisineType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_meal_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Cuisine Type (Italian, Greek, etc.)"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_text_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="List of Ingredients"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/allergens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_text_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Allergens"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_money_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Meal Price"
+                    android:importantForAutofill="no"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/mealDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_background"
+                    android:drawableLeft="@drawable/ic_text_icon"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Meal Description"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:minHeight="48dp"
+                    android:paddingStart="17dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:textColorHint="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addMeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/button_background"
+                android:insetRight="0dp"
+                android:onClick="btnAddMealClick"
+                android:text="Add Meal"
+                android:textAlignment="center" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

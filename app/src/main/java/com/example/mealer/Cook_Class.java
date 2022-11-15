@@ -5,7 +5,7 @@ import android.net.Uri;
 import java.util.ArrayList;
 
 public class Cook_Class extends User_Class {
-    private ArrayList<Meal_Class> meals;
+    private ArrayList<String> meals;
     private String description;
     private String postalCode;
     private String country;
@@ -18,7 +18,7 @@ public class Cook_Class extends User_Class {
 
     }
 
-    public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description){
+    public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description, ArrayList<String> mealList){
         super(first_name , last_name, email , password ,  address , type);
         set_postal_code(postalCode);
         set_country(country);
@@ -27,6 +27,7 @@ public class Cook_Class extends User_Class {
         set_description(description);
         set_suspended(false);
         set_suspension_date("");
+        set_meals(mealList);
     }
     public String get_void_check_URL(){
         return void_check_URL;
@@ -48,18 +49,18 @@ public class Cook_Class extends User_Class {
     public void set_description(String description){this.description = description;}
     public void set_suspended(boolean suspended){this.suspended = suspended;}
     public void set_suspension_date(String suspensionDate){this.suspensionDate = suspensionDate;}
-    public void create_meal(String name, String description, String price, String Meal_type, String Cuisine_type, String[] ingredients, String[] allergens){
-        Meal_Class meal = new Meal_Class(name, description, price, Meal_type, Cuisine_type, ingredients, allergens);
-        add_meal(meal);
+    public ArrayList<String> get_meals(){
+        return meals;
     }
-    public void delete_meal(Meal_Class meal){
+    public void set_meals(ArrayList<String> lstMeal){
+        meals = lstMeal;
+    }
+
+    public void delete_meal(String meal){
         meals.remove(meal);
     }
-    public void edit_meal(Meal_Class meal, int i){
-        meals.set(i, meal);
 
-    }
-    public void add_meal(Meal_Class meal){
+    public void add_meal(String meal){
         meals.add(meal);
     }
 

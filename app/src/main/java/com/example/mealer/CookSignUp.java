@@ -9,11 +9,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -30,12 +27,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 
 public class CookSignUp extends AppCompatActivity {
@@ -65,7 +61,7 @@ public class CookSignUp extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        firstNameField = (EditText) findViewById(R.id.firstNameField2);
+        firstNameField = (EditText) findViewById(R.id.mealName);
         lastNameField = (EditText) findViewById(R.id.lastNameField2);
         passwordField = (EditText) findViewById(R.id.passwordField2);
         emailField = (EditText) findViewById(R.id.emailField2);
@@ -262,10 +258,11 @@ public class CookSignUp extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", "imageURL", description);
-
+                        ArrayList<String> meals = new ArrayList<String>();
+                        Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", "imageURL", description, meals);
+                        String cookId = FirebaseAuth.getInstance().getUid();
                         FirebaseDatabase.getInstance().getReference("Users")
-                                .child(FirebaseAuth.getInstance().getUid())
+                                .child(cookId)
                                 .setValue(cook).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -278,6 +275,7 @@ public class CookSignUp extends AppCompatActivity {
                                         }
                                     }
                                 });
+
 
                     } else {
                         Toast.makeText(CookSignUp.this, "Failed to register!", Toast.LENGTH_LONG).show();

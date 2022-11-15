@@ -7,10 +7,11 @@ public class Meal_Class {
     private String price;
     private String Meal_type;
     private String Cuisine_type;
-    private String[] ingredients;
-    private String[] allergens;
+    private String ingredients;
+    private String allergens;
 
-    public Meal_Class(String name, String description, String price, String Meal_type, String Cuisine_type, String[] ingredients, String[] allergens) {
+    public Meal_Class(String name, String Meal_type, String Cuisine_type, String ingredients, String allergens, String price, String description) {
+
         set_name(name);
         set_description(description);
         set_price(price);
@@ -43,11 +44,11 @@ public class Meal_Class {
     private void set_Meal_type(String type) {
         this.Meal_type = type;
     }
-    private void set_ingredients(String[] ingredients) {
+    private void set_ingredients(String ingredients) {
         this.ingredients = ingredients;
     }
 
-    private void set_allergens(String[] allergens) {
+    private void set_allergens(String allergens) {
         this.allergens = allergens;
     }
 
@@ -73,11 +74,11 @@ public class Meal_Class {
         return Cuisine_type;
     }
 
-    public String[] get_ingredients() {
+    public String get_ingredients() {
         return ingredients;
     }
 
-    public String[] get_allergens() {
+    public String get_allergens() {
         return allergens;
     }
 }

@@ -54,7 +54,7 @@ public class Menu extends AppCompatActivity {
     }
 
     public void btnAddMealClick(View view){
-        startActivity(new Intent(Menu.this, MainActivity.class));
+        startActivity(new Intent(Menu.this, AddMeal.class));
 
     }
 
