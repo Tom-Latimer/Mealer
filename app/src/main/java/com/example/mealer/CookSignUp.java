@@ -258,7 +258,7 @@ public class CookSignUp extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        ArrayList<String> meals = new ArrayList<String>();
+                        ArrayList<Meal_Class> meals = new ArrayList<Meal_Class>();
                         Cook_Class cook = new Cook_Class(firstName, lastName, email, password, address, unitNum, postalCode, country, "COOK", "imageURL", description, meals);
                         String cookId = FirebaseAuth.getInstance().getUid();
                         FirebaseDatabase.getInstance().getReference("Users")

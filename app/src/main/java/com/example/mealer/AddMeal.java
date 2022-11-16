@@ -135,43 +135,11 @@ public class AddMeal extends AppCompatActivity {
 
 
         if (isAcceptable){
-            Meal_Class newMeal = new Meal_Class(mealName, mealType, cuisineType, ingredients, allergens, price, description);
 
-            String mealId = FirebaseAuth.getInstance().getUid();
+            Cook_Class cook = new Cook_Class();
+            cook.add_meal(new Meal_Class(mealName, mealType, cuisineType, ingredients, allergens, price, description));
+            startActivity(new Intent(AddMeal.this, Menu.class));
 
-            FirebaseDatabase.getInstance().getReference("Meals").child(mealId).setValue(newMeal).addOnCompleteListener(new OnCompleteListener<Void>() {
-
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    if (task.isSuccessful()) {
-
-                        String cookId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                        DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookId);
-
-                        dR.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Cook_Class currentCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                                currentCook.add_meal(mealId);
-                                dR.setValue(currentCook);
-
-                                Toast.makeText(AddMeal.this, "User has successfully been registered!", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(AddMeal.this, Menu.class));
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.d("TAG",error.getMessage());
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(AddMeal.this, "Failed to register!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
         }
 
     }

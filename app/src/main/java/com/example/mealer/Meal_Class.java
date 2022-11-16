@@ -81,4 +81,6 @@ public class Meal_Class {
     public String get_allergens() {
         return allergens;
     }
+
+
 }
