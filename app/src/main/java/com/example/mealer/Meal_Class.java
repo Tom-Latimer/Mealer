@@ -1,7 +1,7 @@
 package com.example.mealer;
 
 public class Meal_Class {
-    String mealID;
+    private String mealID;
     private String name;
     private String description;
     private String price;
@@ -9,6 +9,7 @@ public class Meal_Class {
     private String Cuisine_type;
     private String ingredients;
     private String allergens;
+    private boolean offered;
 
     public Meal_Class(String name, String Meal_type, String Cuisine_type, String ingredients, String allergens, String price, String description) {
 
@@ -19,6 +20,7 @@ public class Meal_Class {
         set_Cuisine_type(Cuisine_type);
         set_ingredients(ingredients);
         set_allergens(allergens);
+        set_offered(false);
 
     }
 
@@ -65,7 +67,7 @@ public class Meal_Class {
         return price;
     }
 
-    public String get_Id(){return mealID;}
+    public String get_mealID(){return mealID;}
 
     public String get_Meal_type() {
         return Meal_type;
@@ -83,4 +85,15 @@ public class Meal_Class {
     }
 
 
+    public boolean isOffered() {
+        return offered;
+    }
+
+    public void set_offered(boolean offered) {
+        this.offered = offered;
+    }
+
+    public void set_mealID(String mealID) {
+        this.mealID = mealID;
+    }
 }

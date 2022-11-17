@@ -66,7 +66,7 @@ public class Cook_Class extends User_Class {
     public ArrayList<Meal_Class> get_meals(DataSnapshot dataSnapshot){
         //check if meal is null
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meal").child(uid);
+        //DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meal").child(uid);
 
         for(DataSnapshot shot : dataSnapshot.getChildren()){
             Meal_Class meal = shot.getValue(Meal_Class.class);
@@ -88,7 +88,9 @@ public class Cook_Class extends User_Class {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meals").child(uid);
 
-        ref.push().setValue(meal);
+        String id = ref.push().getKey();
+        meal.set_mealID(id);
+        ref.child(id).setValue(meal);
 
     }
 

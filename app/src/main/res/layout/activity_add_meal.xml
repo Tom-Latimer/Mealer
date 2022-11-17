@@ -86,7 +86,7 @@
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:hint="Meal Type (Main dish, desert, etc.)"
+                    android:hint="Meal Type (Main dish, dessert, etc.)"
                     android:importantForAutofill="no"
                     android:minHeight="48dp"
                     android:paddingStart="17dp"
