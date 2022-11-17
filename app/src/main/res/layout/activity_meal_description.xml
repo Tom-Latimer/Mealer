@@ -19,14 +19,17 @@
             android:id="@+id/textViewName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="TextView"
             android:textAlignment="center"
-            android:textSize="34sp" />
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="TextView"
             android:textAlignment="center" />
 
@@ -34,6 +37,7 @@
             android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="TextView"
             android:textAlignment="center" />
 
@@ -44,15 +48,19 @@
 
             <Button
                 android:id="@+id/offerMealBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="141dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
                 android:text="@string/offerMeal" />
 
             <Button
                 android:id="@+id/buttonDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_text_background"
                 android:text="@string/deleteMeal" />
         </LinearLayout>
 
