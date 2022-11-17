@@ -195,28 +195,42 @@ public class HomeAdmin extends AppCompatActivity {
             SuspensionLength.requestFocus();
         }
 
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
+        DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
+        complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Complaint complaint = (Complaint) snapshot.getValue(Complaint.class);
+                DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(complaint.getComplaintRecipient());
 
-        String cookID ="";
-        for (int i=0; i<complaints.size(); i++){
-            if ((complaints.get(i).getComplaintId())==id){
-                cookID = (complaints.get(i).getComplaintRecipient());
+                dR.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
+                        suspendedCook.set_suspended(true);
 
+                        int numSuspensionLength = Integer.parseInt(txtSuspensionLength);
+                        Date suspensionDate = new Date(new Date().getTime() + (numSuspensionLength * 24*60*60*1000));
+                        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+                        String strSuspensionDate = sdfDate.format(suspensionDate);
+                        suspendedCook.set_suspension_date(strSuspensionDate);
+
+                        dR.setValue(suspendedCook);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("TAG",error.getMessage());
+                    }
+                });
+
+                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
             }
-        }
 
-        DatabaseReference ab =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspended");
-        ab.setValue(true);
-
-        DatabaseReference cd =(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(cookID).child("_suspensionDate");
-
-        int numSuspensionLength = Integer.parseInt(txtSuspensionLength);
-        Date suspensionDate = new Date(new Date().getTime() + (numSuspensionLength * 24*60*60*1000));
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-        String strSuspensionDate = sdfDate.format(suspensionDate);
-        dR.setValue(strSuspensionDate);
-
-        Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TAG",error.getMessage());
+            }
+        });
 
     }
 }
