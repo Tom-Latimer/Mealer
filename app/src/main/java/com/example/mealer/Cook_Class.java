@@ -47,22 +47,22 @@ public class Cook_Class extends User_Class {
         return void_check_URL;
     }
     public String get_description(){
-        return description;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("description").toString();
     }
-    public String get_postal_code() { return (FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_postal_code").toString()); }
-    public String get_country() { return (FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_country").toString()); }
-    public String get_unit_num() { return (FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_unit_num").toString()); }
-    public boolean get_suspended(){ return FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_suspended").equals(true);  }
-    public String get_suspension_date(){ return (FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_suspension_date").toString()); }
-    public void set_postal_code(String postalCode) {FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_postal_code").setValue(postalCode);}
-    public void set_country(String country) { FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_country").setValue(country); }
-    public void set_unit_num(String unitNum) { FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_unit_num").setValue(unitNum); }
+    public String get_postal_code() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_postal_code").toString()); }
+    public String get_country() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_country").toString()); }
+    public String get_unit_num() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_unit_num").toString()); }
+    public boolean get_suspended(){ return FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspended").equals(true);  }
+    public String get_suspension_date(){ return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspension_date").toString()); }
+    public void set_postal_code(String postalCode) {FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_postal_code").setValue(postalCode);}
+    public void set_country(String country) { FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_country").setValue(country); }
+    public void set_unit_num(String unitNum) { FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_unit_num").setValue(unitNum); }
     public void set_void_check(String void_check){
         this.void_check_URL = void_check;
     }
-    public void set_description(String description){FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_description").setValue(description);}
-    public void set_suspended(boolean suspended){FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_suspended").setValue(suspended);}
-    public void set_suspension_date(String suspensionDate){FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("_suspension_date").setValue(suspensionDate);}
+    public void set_description(String description){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_description").setValue(description);}
+    public void set_suspended(boolean suspended){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspended").setValue(suspended);}
+    public void set_suspension_date(String suspensionDate){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspension_date").setValue(suspensionDate);}
     public ArrayList<Meal_Class> get_meals(DataSnapshot dataSnapshot){
         //check if meal is null
 
@@ -79,7 +79,7 @@ public class Cook_Class extends User_Class {
 
 
     public void delete_meal(String meal){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meal").child(uid);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meals").child(uid);
         ref.child(meal).removeValue();
     }
 
