@@ -45,10 +45,10 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textViewAddMeal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add Meal"
+                    android:text="@string/add_meal"
                     android:textAlignment="center"
                     android:textSize="34sp"
                     android:textStyle="bold" />
@@ -65,7 +65,7 @@
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:hint="Meal Name"
+                    android:hint="@string/meal_name"
                     android:importantForAutofill="no"
                     android:minHeight="48dp"
                     android:paddingStart="17dp"
@@ -87,7 +87,7 @@
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
-                    android:hint="Meal Type (Main dish, dessert, etc.)"
+                    android:hint="@string/meal_types_description"
                     android:importantForAutofill="no"
                     android:minHeight="48dp"
                     android:paddingStart="17dp"

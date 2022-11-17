@@ -28,4 +28,7 @@
     <string name="dismiss3">Dismiss Complaint</string>
     <string name="offerMeal">Offer Meal</string>
     <string name="deleteMeal">Delete Meal From Menu</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="meal_name">Meal Name</string>
+    <string name="meal_types_description">Meal Type (Main dish, dessert, etc.)</string>
 </resources>
