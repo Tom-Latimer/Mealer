@@ -1,5 +1,9 @@
 package com.example.mealer;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class User_Class {
     private String _name;
     private String _last_name;
@@ -8,6 +12,8 @@ public class User_Class {
 
     private String _address;
     private String _type;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user.getUid();
 
     public User_Class () {}
 
@@ -22,40 +28,40 @@ public class User_Class {
 
     }
     public String get_name(){
-        return _name;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_name").toString();
     }
     public String get_last_name(){
-        return _last_name;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_last_name").toString();
     }
     public String get_email(){
-        return _email;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_email").toString();
     }
     public String get_password(){
-        return _password;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_password").toString();
     }
     public String get_address(){
-        return _address;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_address").toString();
     }
     public String get_type(){
-        return _type;
+        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_type").toString();
     }
     public void set_name(String name){
-        this._name = name;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_name").setValue(name);
     }
     public void set_last_name(String last_name){
-        this._last_name = last_name;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_last_name").setValue(last_name);
     }
     public void set_email(String email){
-        this._email = email;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_email").setValue(email);
     }
     public void set_password(String password){
-        this._password = password;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_password").setValue(password);
     }
     public void set_address(String address){
-        this._address = address;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_address").setValue(address);
     }
     public void set_type(String type){
-        this._type = type;
+        FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_type").setValue(type);
     }
 
 
