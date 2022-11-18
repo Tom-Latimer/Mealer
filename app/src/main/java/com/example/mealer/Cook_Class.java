@@ -61,8 +61,8 @@ public class Cook_Class extends User_Class {
         this.void_check_URL = void_check;
     }
     public void set_description(String description){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_description").setValue(description);}
-    public void set_suspended(boolean suspended){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspended").setValue(suspended);}
-    public void set_suspension_date(String suspensionDate){FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspension_date").setValue(suspensionDate);}
+    public void set_suspended(boolean suspended){this.suspended = suspended;}
+    public void set_suspension_date(String suspensionDate){this.suspensionDate = suspensionDate;} //aaaa
     public ArrayList<Meal_Class> get_meals(DataSnapshot dataSnapshot){
         //check if meal is null
 
