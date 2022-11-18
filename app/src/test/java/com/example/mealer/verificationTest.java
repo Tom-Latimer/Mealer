@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class verificationTest {
 
     @Test
-    public void testVerificationPassword() {
+    public void testVerificationPasswordFailed() {
 
         // create verification class to verify
         Verification_Class verification = new Verification_Class();
@@ -18,6 +18,22 @@ public class verificationTest {
         // expected error
         String expected = "Password must be at least 6 characters";
 
-        assertEquals(expected, password);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testVerificationPasswordPassed() {
+
+        // create verification class to verify
+        Verification_Class verification = new Verification_Class();
+
+        // verify password and return error if
+        String password = "123456";
+        String actual = verification.checkPassword(password);
+
+        // expected error
+        String expected = "";
+
+        assertEquals(expected, actual);
     }
 }

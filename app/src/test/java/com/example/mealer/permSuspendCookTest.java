@@ -42,7 +42,7 @@ public class permSuspendCookTest {
         //change id to a cook id in firebase
         String id = "";
 
-        boolean expected = true;
+        boolean expected = false;
 
         //method that suspends cook goes here
 
