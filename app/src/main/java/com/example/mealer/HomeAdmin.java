@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -207,7 +208,9 @@ public class HomeAdmin extends AppCompatActivity {
                         Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
                         suspendedCook.set_suspended(true);
 
-                        Date suspensionDate = new Date(new Date().getTime() + (suspensionLength * 24*60*60*1000));
+                        Calendar suspensionDate = Calendar.getInstance();
+                        suspensionDate.add(Calendar.DATE, suspensionLength);
+
                         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
                         String strSuspensionDate = sdfDate.format(suspensionDate);
                         suspendedCook.set_suspension_date(strSuspensionDate);
