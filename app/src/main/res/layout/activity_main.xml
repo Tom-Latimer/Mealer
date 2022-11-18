@@ -9,35 +9,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fdd835"
+        android:background="@color/white"
         android:orientation="vertical"
         android:textAlignment="center">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/txt_welcome_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/dark_blue"
             android:gravity="center_horizontal|center_vertical"
+            android:paddingTop="45dp"
             android:text="@string/welcome_message"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/text_white"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:typeface="" />
 
         <TextView
             android:id="@+id/text_slogan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@color/dark_blue"
             android:gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
             android:text="@string/welcome_message_slogan"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="#F6C634" />
 
         <Space
             android:layout_width="match_parent"
@@ -53,10 +55,12 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:backgroundTint="#7582FA"
             android:drawableBottom="@drawable/button_background"
             android:onClick="btnSignInClick"
             android:text="@string/sign_in"
-            android:background="@drawable/button_background" />
+            android:textColor="@color/text_white" />
 
         <TextView
             android:id="@+id/txt_or_message"
@@ -86,9 +90,11 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/button_blue"
             android:onClick="btnClientSignUpClick"
             android:text="@string/client"
-            android:background="@drawable/button_background" />
+            android:textColor="@color/text_white" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_cook_signup"
@@ -99,9 +105,11 @@
             android:layout_marginRight="30dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/button_blue"
             android:onClick="btnCookSignUpClick"
             android:text="@string/cook"
-            android:background="@drawable/button_background" />
+            android:textColor="@color/text_white" />
 
         <Space
             android:layout_width="match_parent"
