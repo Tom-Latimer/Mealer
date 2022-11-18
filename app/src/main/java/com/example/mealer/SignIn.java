@@ -84,8 +84,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                     databaseUsers.child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            User_Class currUser = (User_Class) snapshot.getValue(User_Class.class);
-                            String type = currUser.get_type();
+
+                            String type = snapshot.child("_type").getValue(String.class);
 
 
                              Intent homeIntent = new Intent();

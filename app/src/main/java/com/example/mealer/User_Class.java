@@ -2,6 +2,7 @@ package com.example.mealer;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class User_Class {
@@ -28,22 +29,22 @@ public class User_Class {
 
     }
     public String get_name(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_name").toString();
+        return this._name;
     }
     public String get_last_name(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_last_name").toString();
+        return this._last_name;
     }
     public String get_email(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_email").toString();
+        return this._email;
     }
     public String get_password(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_password").toString();
+        return this._password;
     }
     public String get_address(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_address").toString();
+        return this._address;
     }
     public String get_type(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_type").toString();
+        return this._type;
     }
     public void set_name(String name){
         FirebaseDatabase.getInstance().getReference("Users").child(uid).child("_name").setValue(name);

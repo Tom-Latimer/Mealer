@@ -47,13 +47,13 @@ public class Cook_Class extends User_Class {
         return void_check_URL;
     }
     public String get_description(){
-        return FirebaseDatabase.getInstance().getReference("Users").child(uid).child("description").toString();
+        return this.description;
     }
-    public String get_postal_code() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_postal_code").toString()); }
-    public String get_country() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_country").toString()); }
-    public String get_unit_num() { return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_unit_num").toString()); }
+    public String get_postal_code(DataSnapshot snapshot) { return this.postalCode; }
+    public String get_country() { return this.country; }
+    public String get_unit_num() { return this.unitNum; }
     public boolean get_suspended(){ return FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspended").equals(true);  }
-    public String get_suspension_date(){ return (FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_suspension_date").toString()); }
+    public String get_suspension_date(){ return this.suspensionDate; }
     public void set_postal_code(String postalCode) {FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_postal_code").setValue(postalCode);}
     public void set_country(String country) { FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_country").setValue(country); }
     public void set_unit_num(String unitNum) { FirebaseDatabase.getInstance().getReference().child("Users").child(uid).child("_unit_num").setValue(unitNum); }
