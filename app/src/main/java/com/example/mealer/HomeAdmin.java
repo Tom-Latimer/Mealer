@@ -172,6 +172,7 @@ public class HomeAdmin extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
                         suspendedCook.set_suspended(true);
+                        suspendedCook.set_suspension_date("");
                         dR.setValue(suspendedCook);
                     }
 

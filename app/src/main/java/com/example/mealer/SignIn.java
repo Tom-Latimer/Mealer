@@ -87,7 +87,6 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
 
                             String type = snapshot.child("_type").getValue(String.class);
 
-
                              Intent homeIntent = new Intent();
 
                             if (type.equals("ADMIN")) {
@@ -116,6 +115,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                         if(currentDate.compareTo(suspensionDate) >= 0) {
                                             // not suspended anymore
                                             cookClass.set_suspended(false);
+                                            cookClass.set_suspension_date("");
                                             homeIntent = new Intent(SignIn.this, HomeClient.class);
                                         } else{
                                             homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
