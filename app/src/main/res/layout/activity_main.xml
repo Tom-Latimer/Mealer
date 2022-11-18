@@ -26,7 +26,7 @@
             android:textColor="@color/text_white"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:typeface="" />
+            android:typeface="normal" />
 
         <TextView
             android:id="@+id/text_slogan"
