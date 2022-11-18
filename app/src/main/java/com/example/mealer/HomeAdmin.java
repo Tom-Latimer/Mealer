@@ -28,7 +28,6 @@ import java.util.List;
 
 public class HomeAdmin extends AppCompatActivity {
 
-
     ListView listViewComplaints;
     DatabaseReference databaseComplaints;
     List<Complaint> complaints;
@@ -131,7 +130,19 @@ public class HomeAdmin extends AppCompatActivity {
 
                 final EditText txtSuspensionLength  = (EditText) dialogView.findViewById(R.id.txtSuspensionLength);
 
-                tempSuspendCook(complaintId, String.valueOf(txtSuspensionLength.getText()));
+                // check if suspension length edittext is empty/not a number
+                String strSuspensionLength = txtSuspensionLength.getText().toString().trim();
+
+                Verification_Class verify = new Verification_Class();
+                String suspensionLengthError = verify.checkSuspensionLength(strSuspensionLength);
+                if (suspensionLengthError != "") {
+                    txtSuspensionLength.setError(suspensionLengthError);
+                    txtSuspensionLength.requestFocus();
+                }
+
+                int suspensionLength = Integer.parseInt(strSuspensionLength);
+
+                tempSuspendCook(complaintId, suspensionLength);
                 builder.dismiss();
             }
         });
@@ -181,19 +192,7 @@ public class HomeAdmin extends AppCompatActivity {
 
     }
 
-    private void tempSuspendCook(String id, String suspensionLength) {
-
-        // check if suspension length edittext is empty/not a number
-        EditText SuspensionLength = (EditText) findViewById(R.id.txtSuspensionLength);
-        String txtSuspensionLength = SuspensionLength.getText().toString().trim();
-
-        Verification_Class verify = new Verification_Class();
-
-        String suspensionLengthError = verify.checkSuspensionLength(suspensionLength);
-        if (suspensionLengthError != "") {
-            SuspensionLength.setError(suspensionLengthError);
-            SuspensionLength.requestFocus();
-        }
+    private void tempSuspendCook(String id, int suspensionLength) {
 
         DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
         complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -208,8 +207,7 @@ public class HomeAdmin extends AppCompatActivity {
                         Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
                         suspendedCook.set_suspended(true);
 
-                        int numSuspensionLength = Integer.parseInt(txtSuspensionLength);
-                        Date suspensionDate = new Date(new Date().getTime() + (numSuspensionLength * 24*60*60*1000));
+                        Date suspensionDate = new Date(new Date().getTime() + (suspensionLength * 24*60*60*1000));
                         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
                         String strSuspensionDate = sdfDate.format(suspensionDate);
                         suspendedCook.set_suspension_date(strSuspensionDate);
