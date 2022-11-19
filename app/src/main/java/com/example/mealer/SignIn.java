@@ -101,7 +101,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                 }
                                 else{
                                     String strSuspensionDate = cookClass.get_suspension_date();
-                                    if(strSuspensionDate == ""){
+                                    if(strSuspensionDate.equals("")){
                                         homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
                                     }else{
                                         Date currentDate = new Date();
