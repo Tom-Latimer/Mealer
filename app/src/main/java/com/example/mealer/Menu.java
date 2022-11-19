@@ -137,13 +137,30 @@ public class Menu extends AppCompatActivity {
         });
     }
 
-    private boolean deleteMeal(String id) {
+    private void deleteMeal(String id) {
 
         DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id);
+        //create a snapshot and check if the meal is offered
+        dR.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Meal_Class meal = snapshot.getValue(Meal_Class.class);
+                if(meal.isOffered()){
+                    Toast.makeText(Menu.this, "You can't delete a meal that is offered", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id);
+                    dR.removeValue();
+                    Toast.makeText(Menu.this, "Meal deleted", Toast.LENGTH_LONG).show();
+                }
+            }
 
-        dR.removeValue();
-        Toast.makeText(getApplicationContext(), "Meal has been deleted", Toast.LENGTH_LONG).show();
-        return true;
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private boolean toggleOfferMeal(String id) {
