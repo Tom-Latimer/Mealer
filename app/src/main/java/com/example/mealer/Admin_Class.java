@@ -31,7 +31,6 @@ public class Admin_Class extends User_Class {
     }
 
     public void permanentSuspendCook(Complaint com) {
-
         String id = com.getComplaintId();
         DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
         complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {

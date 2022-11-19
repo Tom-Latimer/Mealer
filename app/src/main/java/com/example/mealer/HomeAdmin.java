@@ -128,6 +128,7 @@ public class HomeAdmin extends AppCompatActivity {
             public void onClick(View view) {
 
                 administrator.permanentSuspendCook(complaint);
+                Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
@@ -143,7 +144,7 @@ public class HomeAdmin extends AppCompatActivity {
 
                 Verification_Class verify = new Verification_Class();
                 String suspensionLengthError = verify.checkSuspensionLength(strSuspensionLength);
-                if (suspensionLengthError != "") {
+                if (!suspensionLengthError.equals("")) {
                     txtSuspensionLength.setError(suspensionLengthError);
                     txtSuspensionLength.requestFocus();
                 }
@@ -151,6 +152,7 @@ public class HomeAdmin extends AppCompatActivity {
                 int suspensionLength = Integer.parseInt(strSuspensionLength);
 
                 administrator.tempSuspendCook(complaintId, suspensionLength);
+                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
