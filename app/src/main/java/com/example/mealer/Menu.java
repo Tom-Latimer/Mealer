@@ -147,7 +147,7 @@ public class Menu extends AppCompatActivity {
                 Meal_Class meal = snapshot.getValue(Meal_Class.class);
                 if(meal.isOffered()){
                     Toast.makeText(Menu.this, "You can't delete a meal that is offered", Toast.LENGTH_LONG).show();
-                }
+                }//
                 else{
                     DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id);
                     dR.removeValue();
