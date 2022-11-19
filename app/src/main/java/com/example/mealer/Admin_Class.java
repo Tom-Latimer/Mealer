@@ -43,9 +43,8 @@ public class Admin_Class extends User_Class {
                 dR.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                        suspendedCook.set_suspended(true);
-                        dR.setValue(suspendedCook);
+                        snapshot.getRef().child("_suspended").setValue("true");
+                        snapshot.getRef().child("_suspension_date").setValue("");
                     }
 
                     @Override
@@ -78,17 +77,16 @@ public class Admin_Class extends User_Class {
                 dR.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                        suspendedCook.set_suspended(true);
 
                         Calendar suspensionDate = Calendar.getInstance();
                         suspensionDate.add(Calendar.DATE, suspensionLength);
 
                         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                        String strSuspensionDate = sdfDate.format(suspensionDate);
-                        suspendedCook.set_suspension_date(strSuspensionDate);
+                        String strSuspensionDate = sdfDate.format(suspensionDate.getTime());
 
-                        dR.setValue(suspendedCook);
+                        snapshot.getRef().child("_suspended").setValue("true");
+                        snapshot.getRef().child("_suspension_date").setValue(strSuspensionDate);
+
                     }
 
                     @Override

@@ -150,51 +150,11 @@ public class HomeAdmin extends AppCompatActivity {
 
                 int suspensionLength = Integer.parseInt(strSuspensionLength);
 
-                tempSuspendCook(complaintId, suspensionLength);
+                administrator.tempSuspendCook(complaintId, suspensionLength);
                 builder.dismiss();
             }
         });
     }
 
-    private void tempSuspendCook(String id, int suspensionLength) {
 
-        DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
-        complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Complaint complaint = (Complaint) snapshot.getValue(Complaint.class);
-                DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(complaint.getComplaintRecipient());
-
-                dR.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                        suspendedCook.set_suspended(true);
-
-                        Calendar suspensionDate = Calendar.getInstance();
-                        suspensionDate.add(Calendar.DATE, suspensionLength);
-
-                        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                        String strSuspensionDate = sdfDate.format(suspensionDate);
-                        suspendedCook.set_suspension_date(strSuspensionDate);
-
-                        dR.setValue(suspendedCook);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.d("TAG",error.getMessage());
-                    }
-                });
-
-                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
-            }
-        });
-
-    }
 }
