@@ -29,7 +29,7 @@ public class ObjectCreationTest {
         String addressError = verify.checkAddress(address);
         if (!addressError.equals("")) {
 
-            address = "Error";
+            address = "ERROR";
         }
 
         String unitError = verify.checkUnitNum(unitNumber);
@@ -87,4 +87,51 @@ public class ObjectCreationTest {
         assertEquals(ccNumber+securityCode+expirationDate,client.get_cc_information());
 
     }
+
+    @Test
+    public void client2 () {
+        String firstName = "";
+        String lastName = "House";
+        String password = "";
+        String address = "1390 Walkey Ridge";
+        String unitNumber = "22";
+        String email = "mNook@gmail.com";
+        String ccNumber = "1025679156341859";
+        String securityCode = "323";
+        String expirationDate = "04/07";
+
+        Client_Class client = createClient(firstName,lastName,password,address,unitNumber,email,ccNumber,securityCode,expirationDate);
+
+        assertEquals("ERROR",client.get_name());
+        assertEquals(lastName,client.get_last_name());
+        assertEquals("ERROR", client.get_password());
+        assertEquals(address, client.get_address());
+        assertEquals(email, client.get_email());
+        assertEquals(ccNumber+securityCode+expirationDate,client.get_cc_information());
+
+    }
+
+    @Test
+    public void client3 () {
+        String firstName = "";
+        String lastName = "";
+        String password = "";
+        String address = "";
+        String unitNumber = "";
+        String email = "";
+        String ccNumber = "5656817539465821";
+        String securityCode = "659";
+        String expirationDate = "04/09";
+
+        Client_Class client = createClient(firstName,lastName,password,address,unitNumber,email,ccNumber,securityCode,expirationDate);
+
+        assertEquals("ERROR",client.get_name() );
+        assertEquals("ERROR",client.get_last_name());
+        assertEquals("ERROR", client.get_password());
+        assertEquals("ERROR", client.get_address());
+        //assertEquals("ERROR", client.get_email());
+        assertEquals(ccNumber+securityCode+expirationDate,client.get_cc_information());
+
+    }
+
 }
