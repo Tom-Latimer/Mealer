@@ -103,6 +103,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                     String strSuspensionDate = cookClass.get_suspension_date();
                                     if(strSuspensionDate.equals("")){
                                         homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+                                        String susMessage = "You are Permanently Suspended";
+                                        homeIntent.putExtra("suspensionMessage",susMessage);
                                     }else{
                                         Date currentDate = new Date();
                                         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -119,6 +121,8 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
                                             homeIntent = new Intent(SignIn.this, HomeClient.class);
                                         } else{
                                             homeIntent=new Intent(SignIn.this,SuspendedScreen.class);
+                                            String susMessage = "You have been suspended until " + suspensionDate;
+                                            homeIntent.putExtra("suspensionMessage",susMessage);
                                         }
                                     }
 
