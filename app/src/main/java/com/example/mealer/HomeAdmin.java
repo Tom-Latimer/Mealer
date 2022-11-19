@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -128,6 +130,7 @@ public class HomeAdmin extends AppCompatActivity {
             public void onClick(View view) {
 
                 administrator.permanentSuspendCook(complaint);
+                Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
@@ -143,7 +146,7 @@ public class HomeAdmin extends AppCompatActivity {
 
                 Verification_Class verify = new Verification_Class();
                 String suspensionLengthError = verify.checkSuspensionLength(strSuspensionLength);
-                if (suspensionLengthError != "") {
+                if (!suspensionLengthError.equals("")) {
                     txtSuspensionLength.setError(suspensionLengthError);
                     txtSuspensionLength.requestFocus();
                 }
@@ -151,10 +154,16 @@ public class HomeAdmin extends AppCompatActivity {
                 int suspensionLength = Integer.parseInt(strSuspensionLength);
 
                 administrator.tempSuspendCook(complaintId, suspensionLength);
+                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
     }
+    public void btnLogOutClick(View view){
+        startActivity(new Intent(HomeAdmin.this, MainActivity.class));
 
+        FirebaseAuth.getInstance().signOut();
+        //finish();
+    }
 
 }
