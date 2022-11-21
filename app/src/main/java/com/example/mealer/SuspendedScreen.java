@@ -27,7 +27,7 @@ public class SuspendedScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suspended_screen);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
         Intent receivedIntent = getIntent();
         String suspensionMessage = receivedIntent.getExtras().getString("suspensionMessage");
         TextView messageTextView = (TextView)findViewById(R.id.textViewSuspensionMessage);

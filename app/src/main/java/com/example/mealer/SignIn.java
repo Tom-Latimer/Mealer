@@ -38,7 +38,7 @@ public class SignIn extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
         edittxt_email = findViewById(R.id.Email_Field3);
         edittxt_password = findViewById(R.id.Password_Field3);
 

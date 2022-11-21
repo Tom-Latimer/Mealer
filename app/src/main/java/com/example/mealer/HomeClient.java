@@ -23,7 +23,7 @@ public class HomeClient extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_client);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
 
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbRef = FirebaseDatabase.getInstance().getReference("Users")

@@ -41,7 +41,7 @@ public class HomeAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
         administrator = new Admin_Class();
 
         databaseComplaints = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");

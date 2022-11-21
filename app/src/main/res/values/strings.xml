@@ -26,7 +26,7 @@
     <string name="tempSuspension">Temporary Suspension</string>
     <string name="suspensionLength">Length of suspension (days)</string>
     <string name="dismiss3">Dismiss Complaint</string>
-    <string name="offerMeal">Offer Meal</string>
+    <string name="offerMeal">Offer/Unoffer Meal</string>
     <string name="deleteMeal">Delete Meal From Menu</string>
     <string name="add_meal">Add Meal</string>
     <string name="meal_name">Meal Name</string>

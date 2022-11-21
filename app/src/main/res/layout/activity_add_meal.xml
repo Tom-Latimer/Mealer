@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
+    android:background="@color/white"
     tools:context=".Menu">
 
     <ScrollView
@@ -27,15 +27,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <Button
+                    <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnLogOff"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
                         android:background="@drawable/button_background"
+                        android:backgroundTint="@color/button_blue"
                         android:onClick="btnBackClick"
-                        android:text="Back" />
+                        android:text="Back"
+                        android:textColor="@color/white" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -50,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/add_meal"
                     android:textAlignment="center"
+                    android:textColor="@color/dark_blue"
                     android:textSize="34sp"
                     android:textStyle="bold" />
 
@@ -62,6 +65,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -84,6 +88,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -106,6 +111,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_meal_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -128,6 +134,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_text_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -150,6 +157,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_text_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -172,6 +180,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_money_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -194,6 +203,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_background"
+                    android:backgroundTint="@color/textField_blue"
                     android:drawableLeft="@drawable/ic_text_icon"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -210,7 +220,7 @@
 
             </LinearLayout>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addMeal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -219,12 +229,15 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="7dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/button_background"
+                android:backgroundTint="@color/button_blue"
                 android:gravity="center"
                 android:insetRight="0dp"
                 android:onClick="btnAddMealClick"
                 android:text="Add Meal"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 

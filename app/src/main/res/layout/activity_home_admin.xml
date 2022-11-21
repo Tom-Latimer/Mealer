@@ -4,69 +4,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdd835"
+    android:background="@color/white"
     tools:context=".HomeClient">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dark_blue">
 
         <LinearLayout
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFEB3B"
+            android:background="@color/white"
             android:orientation="vertical">
-
-            <Button
-                android:id="@+id/logOut"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_background"
-                android:onClick="btnLogOutClick"
-                android:text="@string/log_out"
-                app:icon="@drawable/ic_logout_icon" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/weclometxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/welcome"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="40sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/greetingtxt"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#8C7777"
-                android:backgroundTint="#FDFBFB"
-                android:text="You are logged in as Admin"
-                android:textAlignment="center"
-                android:textScaleX="1"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/dark_blue"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/logOut"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/button_blue"
+                    android:drawableLeft="@drawable/ic_logout_icon"
+                    android:onClick="btnLogOutClick"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/log_out"
+                    android:textColor="@color/white" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/dark_blue"
+                    android:backgroundTint="@color/dark_blue" />
+
+                <TextView
+                    android:id="@+id/weclometxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dark_blue"
+                    android:backgroundTint="@color/dark_blue"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/welcome"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_white"
+                    android:textSize="40sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/dark_blue"
+                    android:backgroundTint="@color/dark_blue" />
+
+                <TextView
+                    android:id="@+id/greetingtxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#8C7777"
+                    android:backgroundTint="@color/dark_blue"
+                    android:text="You are logged in as Admin"
+                    android:textAlignment="center"
+                    android:textColor="@color/yellow"
+                    android:textScaleX="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:backgroundTint="@color/dark_blue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <Space
@@ -79,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:text="@string/clientComplaints"
+                    android:textColor="@color/dark_blue"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -93,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/white"
                 android:orientation="horizontal">
 
                 <Space
@@ -111,8 +134,8 @@
                 android:id="@+id/listViewComplaints"
                 android:layout_width="match_parent"
                 android:layout_height="489dp"
-                android:background="#404040"
-                android:backgroundTint="#00FFFFFF"></ListView>
+                android:background="@color/white"
+                android:backgroundTint="@color/white"></ListView>
 
         </LinearLayout>
     </ScrollView>
