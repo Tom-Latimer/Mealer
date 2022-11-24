@@ -44,6 +44,7 @@ public class Admin_Class extends User_Class {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         snapshot.getRef().child("_suspended").setValue("true");
                         snapshot.getRef().child("_suspension_date").setValue("");
+                        complaintDb.child(id).removeValue();
                     }
 
                     @Override
@@ -85,6 +86,7 @@ public class Admin_Class extends User_Class {
 
                         snapshot.getRef().child("_suspended").setValue("true");
                         snapshot.getRef().child("_suspension_date").setValue(strSuspensionDate);
+                        complaintDb.child(id).removeValue();
 
                     }
 
