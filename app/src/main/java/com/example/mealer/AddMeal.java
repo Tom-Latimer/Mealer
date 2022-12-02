@@ -30,6 +30,7 @@ public class AddMeal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meal);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
     }
 
     public void btnBackClick(View view){

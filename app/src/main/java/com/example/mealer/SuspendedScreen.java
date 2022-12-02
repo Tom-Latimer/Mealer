@@ -27,30 +27,11 @@ public class SuspendedScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suspended_screen);
-
-        // if temporarily suspended
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String uid = Objects.requireNonNull(firebaseAuth.getCurrentUser()).getUid();
-        DatabaseReference userDetails = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
-        userDetails.keepSynced(true);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
+        Intent receivedIntent = getIntent();
+        String suspensionMessage = receivedIntent.getExtras().getString("suspensionMessage");
         TextView messageTextView = (TextView)findViewById(R.id.textViewSuspensionMessage);
-        userDetails.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-
-                if(suspendedCook.get_suspension_date() != ""){
-                    messageTextView.setText("You have been suspended until " + suspendedCook.get_suspension_date());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        messageTextView.setText(suspensionMessage);
 
     }
 

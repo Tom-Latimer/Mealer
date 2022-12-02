@@ -4,19 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
+    android:background="@color/white"
     tools:context=".SuspendedScreen">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="104dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
+        android:drawableLeft="@drawable/ic_logout_icon"
         android:onClick="btnLogOutClick"
-        android:text="Logout"
-        app:icon="@drawable/ic_logout_icon"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/log_out"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="You have been suspended"
+        android:textColor="@color/dark_blue"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

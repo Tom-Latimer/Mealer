@@ -35,7 +35,7 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
         databaseMeals = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals");
 
         listViewMeals = (ListView) findViewById(R.id.menuListView);
@@ -46,7 +46,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int item, long l) {
                 Meal_Class meal = meals.get(item);
-                showActionMealDialog(meal.get_mealID(), meal.get_name(), meal.get_price(), meal.get_description());
+                showActionMealDialog(meal.get_mealID(), meal.get_name(), meal.get_price(), meal.get_description(), meal.get_ingredients(), meal.get_allergens(), meal.get_Meal_type(), meal.get_Cuisine_type());
                 return true;
             }
         });
@@ -97,7 +97,7 @@ public class Menu extends AppCompatActivity {
     }
 
 
-    private void showActionMealDialog(final String mealId,  String mealPrice,String description, String mealName){
+    private void showActionMealDialog(final String mealId,  String mealPrice,String description, String mealName, String ingredients, String allergens, String mealType, String cuisineType){
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -105,17 +105,25 @@ public class Menu extends AppCompatActivity {
         dialogBuilder.setView(dialogView);
 
         final TextView txtMealPrice = (TextView) dialogView.findViewById(R.id.textViewPrice);
+        final TextView txtMealType = (TextView) dialogView.findViewById(R.id.textViewMealType);
+        final TextView txtCuisineType = (TextView) dialogView.findViewById(R.id.textViewCuisineType);
+        final TextView txtAllergens = (TextView) dialogView.findViewById(R.id.textViewAllergens);
+        final TextView txtIngredients = (TextView) dialogView.findViewById(R.id.textViewIngredients);
         final TextView txtMealDescription = (TextView) dialogView.findViewById(R.id.textViewDescription);
         final TextView txtMealName=(TextView) dialogView.findViewById(R.id.textViewName);
         final Button btnDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
         final Button btnOfferMeal = (Button) dialogView.findViewById(R.id.offerMealBtn);
 
 
-        String title = "Meal name: " + mealId;
+        String title = "Meal ID: " + mealId;
         dialogBuilder.setTitle(title);
         txtMealName.setText(mealName);
         txtMealPrice.setText(mealPrice);
         txtMealDescription.setText(description);
+        txtMealType.setText(mealType);
+        txtCuisineType.setText(cuisineType);
+        txtIngredients.setText(ingredients);
+        txtAllergens.setText(allergens);
 
         final AlertDialog builder = dialogBuilder.create();
         builder.show();
@@ -137,13 +145,30 @@ public class Menu extends AppCompatActivity {
         });
     }
 
-    private boolean deleteMeal(String id) {
+    private void deleteMeal(String id) {
 
         DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id);
+        //create a snapshot and check if the meal is offered
+        dR.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Meal_Class meal = snapshot.getValue(Meal_Class.class);
+                if(meal.isOffered()){
+                    Toast.makeText(Menu.this, "You can't delete a meal that is offered", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Meals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(id);
+                    dR.removeValue();
+                    Toast.makeText(Menu.this, "Meal deleted", Toast.LENGTH_LONG).show();
+                }
+            }
 
-        dR.removeValue();
-        Toast.makeText(getApplicationContext(), "Meal has been deleted", Toast.LENGTH_LONG).show();
-        return true;
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     private boolean toggleOfferMeal(String id) {

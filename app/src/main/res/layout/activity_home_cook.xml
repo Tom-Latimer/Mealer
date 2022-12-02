@@ -4,31 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fdd835"
+    android:background="@color/white"
     tools:context=".HomeClient">
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFEB3B"
+        android:background="@color/dark_blue"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/logOut"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
+            android:layout_width="104dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/button_background"
+            android:backgroundTint="@color/button_blue"
+            android:drawableLeft="@drawable/ic_logout_icon"
             android:onClick="btnLogOutClick"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="@string/log_out"
-            app:icon="@drawable/ic_logout_icon" />
+            android:textColor="@color/white" />
 
         <Space
             android:layout_width="match_parent"
@@ -41,7 +45,7 @@
             android:fontFamily="sans-serif-black"
             android:text="@string/welcome"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/text_white"
             android:textSize="40sp" />
 
         <Space
@@ -52,25 +56,16 @@
             android:id="@+id/greetingtxt"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="#8C7777"
-            android:backgroundTint="#FDFBFB"
             android:text="You are logged in as Cook"
             android:textAlignment="center"
+            android:textColor="@color/yellow"
             android:textScaleX="1"
             android:textSize="20sp"
             android:textStyle="bold|italic" />
 
-        <Button
-            android:id="@+id/MenuButton"
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:onClick="onMenuClick"
-            android:text="Your Menu"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:iconTint="#FFFFFF" />
+            android:layout_height="30dp" />
 
         <Button
             android:id="@+id/btnRequests"
@@ -78,25 +73,40 @@
             android:layout_height="wrap_content"
             android:text="Purchase Requests" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="btnProfileClick"
-            android:text="Profile and Ratings" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/MenuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
+        android:onClick="onMenuClick"
+        android:text="Your Menu"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/white"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/cookPhotoHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/cookPhotoHome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginRight="45dp"
-            android:contentDescription="@string/cook"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/a99b323bfcfc25084e87cd29f6575533" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/cookPhotoHome"
+        android:layout_width="305dp"
+        android:layout_height="395dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/cook"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.407"
+        app:srcCompat="@drawable/a99b323bfcfc25084e87cd29f6575533" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

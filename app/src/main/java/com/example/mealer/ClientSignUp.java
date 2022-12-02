@@ -34,7 +34,7 @@ public class ClientSignUp extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_sign_up);
-
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
         mAuth = FirebaseAuth.getInstance();
 
         firstNameField = (EditText) findViewById(R.id.firstNameField);

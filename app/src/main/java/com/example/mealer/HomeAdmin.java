@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,10 +35,14 @@ public class HomeAdmin extends AppCompatActivity {
     DatabaseReference databaseComplaints;
     List<Complaint> complaints;
 
+    Admin_Class administrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_admin);
+        getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
+        administrator = new Admin_Class();
 
         databaseComplaints = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
 
@@ -48,7 +54,7 @@ public class HomeAdmin extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int item, long l) {
                 Complaint complaint = complaints.get(item);
-                showActionComplaintDialog(complaint.getComplaintId(), complaint.getComplaintMessage());
+                showActionComplaintDialog(complaint);
                 return true;
             }
         });
@@ -89,7 +95,10 @@ public class HomeAdmin extends AppCompatActivity {
     }
 
 
-    private void showActionComplaintDialog(final String complaintId, String complaint) {
+    private void showActionComplaintDialog(Complaint complaint) {
+
+        final String complaintId = complaint.getComplaintId();
+        String complaintMessage = complaint.getComplaintMessage();
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -103,7 +112,7 @@ public class HomeAdmin extends AppCompatActivity {
 
         String title = "Complaint ID: " + complaintId;
         dialogBuilder.setTitle(title);
-        txtComplaint.setText(complaint);
+        txtComplaint.setText(complaintMessage);
 
         final AlertDialog builder = dialogBuilder.create();
         builder.show();
@@ -111,7 +120,7 @@ public class HomeAdmin extends AppCompatActivity {
         buttonDismissComplaint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismissComplaint(complaintId);
+                administrator.dismissComplaint(complaint);
                 builder.dismiss();
             }
         });
@@ -120,7 +129,8 @@ public class HomeAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                permanentSuspendCook(complaintId);
+                administrator.permanentSuspendCook(complaint);
+                Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
@@ -136,102 +146,24 @@ public class HomeAdmin extends AppCompatActivity {
 
                 Verification_Class verify = new Verification_Class();
                 String suspensionLengthError = verify.checkSuspensionLength(strSuspensionLength);
-                if (suspensionLengthError != "") {
+                if (!suspensionLengthError.equals("")) {
                     txtSuspensionLength.setError(suspensionLengthError);
                     txtSuspensionLength.requestFocus();
                 }
 
                 int suspensionLength = Integer.parseInt(strSuspensionLength);
 
-                tempSuspendCook(complaintId, suspensionLength);
+                administrator.tempSuspendCook(complaintId, suspensionLength);
+                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
                 builder.dismiss();
             }
         });
     }
+    public void btnLogOutClick(View view){
+        startActivity(new Intent(HomeAdmin.this, MainActivity.class));
 
-
-    private boolean dismissComplaint(String id) {
-
-        DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints").child(id);
-
-        dR.removeValue();
-        Toast.makeText(getApplicationContext(), "Complaint Dismissed", Toast.LENGTH_LONG).show();
-        return true;
+        FirebaseAuth.getInstance().signOut();
+        //finish();
     }
 
-    private void permanentSuspendCook(String id) {
-        DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
-        complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Complaint complaint = (Complaint) snapshot.getValue(Complaint.class);
-                DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(complaint.getComplaintRecipient());
-
-                dR.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        snapshot.getRef().child("_suspended").setValue("true");
-                        snapshot.getRef().child("_suspension_date").setValue("");
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.d("TAG",error.getMessage());
-                    }
-                });
-
-                Toast.makeText(getApplicationContext(), "Cook Permanently Suspended", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
-            }
-        });
-
-
-    }
-
-    private void tempSuspendCook(String id, int suspensionLength) {
-
-        DatabaseReference complaintDb = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Complaints");
-        complaintDb.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Complaint complaint = (Complaint) snapshot.getValue(Complaint.class);
-                DatabaseReference dR=(DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(complaint.getComplaintRecipient());
-
-                dR.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Cook_Class suspendedCook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                        suspendedCook.set_suspended(true);
-
-                        Calendar suspensionDate = Calendar.getInstance();
-                        suspensionDate.add(Calendar.DATE, suspensionLength);
-
-                        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
-                        String strSuspensionDate = sdfDate.format(suspensionDate);
-                        suspendedCook.set_suspension_date(strSuspensionDate);
-
-                        dR.setValue(suspendedCook);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.d("TAG",error.getMessage());
-                    }
-                });
-
-                Toast.makeText(getApplicationContext(), "Cook Temporarily Suspended", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("TAG",error.getMessage());
-            }
-        });
-
-    }
 }
