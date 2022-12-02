@@ -7,6 +7,7 @@
     tools:context=".SearchMeal">
 
     <LinearLayout
+        android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,92 +19,112 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/backButton"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/button_background"
-            android:textColor="@color/white"/>
+            android:text="@string/backButton"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/searchPageHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mealSearch"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/mealSearch"
             android:textColor="@color/dark_blue"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/typeSearchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_background"
-            android:hint="@string/mealNameHint"
-            android:layout_marginTop="7dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="15dp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/mealNameHint"
+            android:inputType="textPersonName"
 
             android:paddingStart="17dp"
             android:paddingTop="5dp"
             android:paddingEnd="17dp"
             android:paddingBottom="5dp"
             android:textColorHint="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/nameSearchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_background"
-            android:hint="@string/mealTypeHint"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="15dp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/mealTypeHint"
+            android:inputType="textPersonName"
             android:paddingStart="17dp"
             android:paddingTop="5dp"
             android:paddingEnd="17dp"
             android:paddingBottom="5dp"
             android:textColorHint="@color/black"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/cuisineSearchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:background="@drawable/edit_text_background"
-            android:hint="@string/cuisineTypeHint"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:hint="@string/cuisineTypeHint"
+            android:inputType="textPersonName"
             android:paddingStart="17dp"
             android:paddingTop="5dp"
             android:paddingEnd="17dp"
             android:paddingBottom="5dp"
             android:textColorHint="@color/black"
-            android:textSize="18sp"
-            android:layout_marginEnd="15dp"/>
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button4"
+            android:id="@+id/searchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/searchButton"
-            android:background="@drawable/button_background"
-            android:textColor="@color/white"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_background"
             android:minHeight="30dp"
             android:paddingStart="80dp"
             android:paddingEnd="80dp"
-            android:layout_marginTop="10dp"
-             />
+            android:text="@string/searchButton"
+            android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
