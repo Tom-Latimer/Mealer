@@ -24,7 +24,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/button_background"
                 android:backgroundTint="@color/button_blue"
-                android:text="Back"
+                android:text="@string/backButton"
                 android:textColor="@color/white" />
 
             <TextView
