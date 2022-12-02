@@ -30,4 +30,7 @@ public class HomeCook extends AppCompatActivity {
 
         //finish();
     }
+    public void btnProfileClick(View view){
+        startActivity(new Intent(HomeCook.this, Profile.class));
+    }
 }
