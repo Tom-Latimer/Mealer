@@ -74,6 +74,7 @@ public class Cook_Class extends User_Class {
 
         String id = ref.push().getKey();
         meal.set_mealID(id);
+        meal.set_cookID(uid);
         ref.child(id).setValue(meal);
 
     }

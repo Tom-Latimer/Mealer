@@ -2,6 +2,7 @@ package com.example.mealer;
 
 public class Meal_Class {
     private String mealID;
+    private String cookID;
     private String name;
     private String description;
     private String price;
@@ -69,6 +70,8 @@ public class Meal_Class {
 
     public String get_mealID(){return mealID;}
 
+    public String get_cookID() {return cookID;}
+
     public String get_Meal_type() {
         return Meal_type;
     }
@@ -96,4 +99,6 @@ public class Meal_Class {
     public void set_mealID(String mealID) {
         this.mealID = mealID;
     }
+
+    public void set_cookID(String cookID) {this.cookID = cookID;}
 }

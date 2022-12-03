@@ -116,6 +116,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name="com.example.mealer.Profile" />
     </application>
 
 </manifest>
