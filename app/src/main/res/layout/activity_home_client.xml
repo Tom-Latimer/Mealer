@@ -39,7 +39,7 @@
             android:layout_height="20dp" />
 
         <TextView
-            android:id="@+id/weclometxt"
+            android:id="@+id/Purchasetxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"

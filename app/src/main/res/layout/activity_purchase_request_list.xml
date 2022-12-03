@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PurchaseRequestList">
+
+    <TextView
+        android:id="@+id/txtClientName2"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Client Name:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txtMealName2"
+        tools:layout_editor_absoluteX="12dp" />
+
+    <TextView
+        android:id="@+id/txtPickUpTime2"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Pick Up Time:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txtClientName2"
+        tools:layout_editor_absoluteX="13dp" />
+
+    <TextView
+        android:id="@+id/txtMealName"
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txtMealName2"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/txtMealName2"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:text="Meal Name:"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="12dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/txtClientName"
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txtClientName2"
+        app:layout_constraintTop_toBottomOf="@+id/txtMealName" />
+
+    <TextView
+        android:id="@+id/txtPickUpTime"
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txtPickUpTime2"
+        app:layout_constraintTop_toBottomOf="@id/txtClientName" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApprove"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="90dp"
+        android:layout_height="36dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
+        android:onClick="btnApproveClick"
+        android:text="Approve"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="12dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnReject"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="90dp"
+        android:layout_height="36dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
+        android:onClick="btnRejectClick"
+        android:text="Reject"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="54dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

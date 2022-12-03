@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Cook_Class extends User_Class {
     private ArrayList<Meal_Class> meals;
+    private ArrayList<PurchaseRequest> purchaseRequests;
     private String description;
     private String postalCode;
     private String country;
@@ -24,7 +25,7 @@ public class Cook_Class extends User_Class {
 
     }
 
-    public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description, ArrayList<Meal_Class> mealList){
+    public Cook_Class(String first_name , String last_name, String email , String password , String address , String unitNum , String postalCode , String country ,String type , String void_check_URL , String description, ArrayList<Meal_Class> mealList, ArrayList<PurchaseRequest> purchaseRequestsList){
         super(first_name , last_name, email , password ,  address , type);
         set_postal_code(postalCode);
         set_country(country);
@@ -34,6 +35,7 @@ public class Cook_Class extends User_Class {
         set_suspended(false);
         set_suspension_date("");
         set_meals(mealList);
+        set_purchaseRequests(purchaseRequestsList);
     }
     public String get_void_check_URL(){
         return void_check_URL;
@@ -60,6 +62,12 @@ public class Cook_Class extends User_Class {
     }
     public void set_meals(ArrayList<Meal_Class> lstMeal){
         meals = lstMeal;
+    }
+    public ArrayList<PurchaseRequest> get_purchaseRequests(){
+        return purchaseRequests;
+    }
+    public void set_purchaseRequests(ArrayList<PurchaseRequest> lstPurchaseRequests){
+        purchaseRequests = lstPurchaseRequests;
     }
 
     public void delete_meal(String meal){

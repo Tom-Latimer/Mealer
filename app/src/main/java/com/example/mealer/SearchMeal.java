@@ -31,7 +31,7 @@ public class SearchMeal extends AppCompatActivity {
 
     public void requestMeal(Meal_Class meal, String clientName, String pickupTime) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MealRequests").child(meal.get_cookID());
-        PurchaseRequest request = new PurchaseRequest(meal, clientName, pickupTime, false);
+        PurchaseRequest request = new PurchaseRequest(meal, clientName, pickupTime, "Pending");
         ref.push().setValue(request);
     }
 }

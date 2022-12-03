@@ -5,15 +5,15 @@ public class PurchaseRequest {
     private Meal_Class meal;
     private String clientName;
     private String pickUpTime;
-    private boolean approved;
+    private String status;
 
     public PurchaseRequest(){}
 
-    public PurchaseRequest(Meal_Class meal, String clientName, String pickUpTime, boolean approved) {
+    public PurchaseRequest(Meal_Class meal, String clientName, String pickUpTime, String status) {
         this.meal = meal;
         this.clientName = clientName;
         this.pickUpTime = pickUpTime;
-        this.approved = approved;
+        this.status = status;
     }
 
         public Meal_Class getMeal() { return meal; }
@@ -26,7 +26,7 @@ public class PurchaseRequest {
     public void setPickUpTime(String pickUpTime){}
 
 
-    public boolean getApproved(){ return approved; }
-    public void setApproved(boolean approved){ this.approved = approved; }
+    public String getStatus(){ return status; }
+    public void setStatus(String status){ this.status = status; }
 
 }

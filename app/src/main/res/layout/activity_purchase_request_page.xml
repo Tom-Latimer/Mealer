@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".HomeClient">
+    tools:context=".PurchaseRequestPage">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,21 +25,48 @@
                 android:background="@color/dark_blue"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/logOut"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_width="104dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/button_background"
-                    android:backgroundTint="@color/button_blue"
-                    android:drawableLeft="@drawable/ic_logout_icon"
-                    android:onClick="btnLogOutClick"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="@string/log_out"
-                    android:textColor="@color/white" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnBack"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="104dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@color/button_blue"
+                        android:onClick="btnBackClick"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/backButton"
+                        android:textColor="@color/white" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/logOut"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="104dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/button_background"
+                        android:backgroundTint="@color/button_blue"
+                        android:drawableLeft="@drawable/ic_logout_icon"
+                        android:onClick="btnLogOutClick"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/log_out"
+                        android:textColor="@color/white" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -54,7 +81,7 @@
                     android:background="@color/dark_blue"
                     android:backgroundTint="@color/dark_blue"
                     android:fontFamily="sans-serif-black"
-                    android:text="@string/welcome"
+                    android:text="Purchase Requests"
                     android:textAlignment="center"
                     android:textColor="@color/text_white"
                     android:textSize="40sp" />
@@ -64,50 +91,6 @@
                     android:layout_height="20dp"
                     android:background="@color/dark_blue"
                     android:backgroundTint="@color/dark_blue" />
-
-                <TextView
-                    android:id="@+id/greetingtxt"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#8C7777"
-                    android:backgroundTint="@color/dark_blue"
-                    android:text="You are logged in as Admin"
-                    android:textAlignment="center"
-                    android:textColor="@color/yellow"
-                    android:textScaleX="1"
-                    android:textSize="20sp"
-                    android:textStyle="bold|italic" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:backgroundTint="@color/dark_blue" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <Space
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:text="@string/clientComplaints"
-                    android:textColor="@color/dark_blue"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -133,7 +116,7 @@
             <ListView
                 android:id="@+id/listViewPurchaseRequests"
                 android:layout_width="match_parent"
-                android:layout_height="489dp"
+                android:layout_height="573dp"
                 android:background="@color/white"
                 android:backgroundTint="@color/white"></ListView>
 

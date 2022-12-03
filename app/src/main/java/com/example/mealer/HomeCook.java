@@ -33,4 +33,8 @@ public class HomeCook extends AppCompatActivity {
     public void btnProfileClick(View view){
         startActivity(new Intent(HomeCook.this, Profile.class));
     }
+
+    public void btnPurchaseRequestClick(View view){
+        startActivity(new Intent(HomeCook.this, PurchaseRequestPage.class));
+    }
 }
