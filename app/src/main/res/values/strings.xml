@@ -40,4 +40,6 @@
     <string name="search_for_meals">Search for Meals</string>
     <string name="complain">Complain</string>
     <string name="rate">Rate</string>
+    <string name="meal">Meal</string>
+    <string name="status">Status</string>
 </resources>

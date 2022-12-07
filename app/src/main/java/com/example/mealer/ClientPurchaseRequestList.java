@@ -31,4 +31,42 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 //        TextView txtPickup;
     }
 
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater inflater = context.getLayoutInflater();
+        View listViewItem = inflater.inflate(R.layout.activity_purchase_request_list, null, true);
+
+        TextView txtMealName = (TextView) listViewItem.findViewById(R.id.txtMealName);
+        TextView txtCookName = (TextView) listViewItem.findViewById(R.id.txtCookName);
+        TextView txtPickUpTime = (TextView) listViewItem.findViewById(R.id.txtPickUpTime);
+
+        purchaseRequest = purchaseRequests.get(position);
+        String mealName = (purchaseRequest.getMeal()).get_name();
+        String clientName = purchaseRequest.getClientName();
+        String pickUpTime = purchaseRequest.getPickUpTime();
+
+        txtMealName.setText(mealName);
+        txtClientName.setText(clientName);
+        txtPickUpTime.setText(pickUpTime);
+
+        return listViewItem;
+    }
+
+
+    private OnClickListener mOnTitleClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final int position = mListView.getPositionForView((View) v.getParent());
+            Log.v(TAG, "Title clicked, row %d", position);
+        }
+    };
+
+    private OnClickListener mOnTextClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final int position = mListView.getPositionForView((View) v.getParent());
+            Log.v(TAG, "Text clicked, row %d", position);
+        }
+    };
+
 }

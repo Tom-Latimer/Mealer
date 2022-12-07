@@ -44,7 +44,7 @@ public class HomeClient extends AppCompatActivity {
 
         // createe recyclerView and populate with Purchase Requests
 
-        listPurchaseRequests = (ListView) findViewById(R.id.listPurchaseRequests);
+        listPurchaseRequests = (ListView) findViewById(R.id.listViewClientPurchaseRequests);
 
         databasePurchaseRequests = (DatabaseReference) FirebaseDatabase.getInstance().getReference("PurchaseRequests");
 

@@ -97,36 +97,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnRequests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button_background"
-            android:backgroundTint="@color/button_blue"
-            android:onClick="btnPurchaseRequestClick"
-            android:text="Purchase Requests"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/white"
-            app:iconTint="#FFFFFF" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
     <ListView
-        android:id="@+id/listPurchasRequests"
+        android:id="@+id/listViewClientPurchaseRequests"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

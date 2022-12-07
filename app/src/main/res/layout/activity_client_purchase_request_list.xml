@@ -6,21 +6,20 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textViewMeal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <TextView
         android:id="@+id/textViewStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="57dp" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meal:"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="19dp" />
 
     <TextView
         android:id="@+id/textViewCook"
@@ -31,45 +30,54 @@
         tools:layout_editor_absoluteY="95dp" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/textViewMealName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Status"
+        android:text="@string/meal"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <TextView
+        android:id="@+id/textViewStatusName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/status"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="57dp" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textViewCookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cook"
+        android:text="@string/cook"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="18dp"
         tools:layout_editor_absoluteY="95dp" />
 
-    <TextView
-        android:id="@+id/textViewMeal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="19dp" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRate"
-        android:layout_width="110dp"
-        android:layout_height="45dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="90dp"
+        android:layout_height="36dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
         android:text="@string/rate"
-        tools:layout_editor_absoluteX="282dp"
-        tools:layout_editor_absoluteY="24dp" />
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="12dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnComplain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="90dp"
+        android:layout_height="36dp"
+        android:background="@drawable/button_background"
+        android:backgroundTint="@color/button_blue"
         android:text="@string/complain"
-        tools:layout_editor_absoluteX="282dp"
-        tools:layout_editor_absoluteY="76dp" />
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="54dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
