@@ -1,10 +1,12 @@
 package com.example.mealer;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,39 +36,44 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.activity_purchase_request_list, null, true);
+        View listViewItem = inflater.inflate(R.layout.activity_client_purchase_request_list, null, true);
 
-        TextView txtMealName = (TextView) listViewItem.findViewById(R.id.txtMealName);
-        TextView txtCookName = (TextView) listViewItem.findViewById(R.id.txtCookName);
-        TextView txtPickUpTime = (TextView) listViewItem.findViewById(R.id.txtPickUpTime);
+        TextView txtMealName = (TextView) listViewItem.findViewById(R.id.textViewMeal);
+        TextView txtCookName = (TextView) listViewItem.findViewById(R.id.textViewCook);
+        TextView txtStatusName = (TextView) listViewItem.findViewById(R.id.textViewStatus);
 
         purchaseRequest = purchaseRequests.get(position);
         String mealName = (purchaseRequest.getMeal()).get_name();
-        String clientName = purchaseRequest.getClientName();
+        String cookName = purchaseRequest.getCookName();
+        String status = purchaseRequest.getStatus();
         String pickUpTime = purchaseRequest.getPickUpTime();
 
         txtMealName.setText(mealName);
-        txtClientName.setText(clientName);
-        txtPickUpTime.setText(pickUpTime);
+        txtCookName.setText(cookName);
+        txtStatusName.setText(status);
+
+        Button btnRate = (Button) listViewItem.findViewById(R.id.btnRate);
+        Button btnComplain = (Button) listViewItem.findViewById(R.id.btnComplain);
+
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
+            }
+        });
+
+        btnComplain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
+            }
+        });
 
         return listViewItem;
+
+
     }
 
 
-    private OnClickListener mOnTitleClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final int position = mListView.getPositionForView((View) v.getParent());
-            Log.v(TAG, "Title clicked, row %d", position);
-        }
-    };
-
-    private OnClickListener mOnTextClickListener = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            final int position = mListView.getPositionForView((View) v.getParent());
-            Log.v(TAG, "Text clicked, row %d", position);
-        }
-    };
 
 }

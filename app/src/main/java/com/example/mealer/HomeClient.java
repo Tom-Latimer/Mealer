@@ -80,6 +80,11 @@ public class HomeClient extends AppCompatActivity {
         });
     }
 
+    public void btnSearchMealsClick(View view){
+        startActivity(new Intent(HomeClient.this, SearchMeal.class));
+
+    }
+
     public void btnLogOutClick(View view) {
         startActivity(new Intent(HomeClient.this, MainActivity.class));
 
