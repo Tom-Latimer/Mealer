@@ -38,4 +38,6 @@
     <string name="searchButton">Search</string>
     <string name="backButton">Back</string>
     <string name="search_for_meals">Search for Meals</string>
+    <string name="complain">Complain</string>
+    <string name="rate">Rate</string>
 </resources>
