@@ -29,7 +29,7 @@ public class PurchaseRequest {
         this.rating = rating;
     }
 
-        public Meal_Class getMeal() { return meal; }
+    public Meal_Class getMeal() { return meal; }
     public void setMeal(Meal_Class meal) {this.meal = meal;}
 
     public String getClientID(){ return clientID; }

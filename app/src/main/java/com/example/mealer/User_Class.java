@@ -27,6 +27,7 @@ public class User_Class {
     public String get_last_name(){
         return _last_name;
     }
+    public String get_full_name(){return (_name + " " + _last_name);}
     public String get_email(){
         return _email;
     }
