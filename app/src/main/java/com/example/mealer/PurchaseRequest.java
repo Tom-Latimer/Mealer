@@ -3,8 +3,8 @@ package com.example.mealer;
 public class PurchaseRequest {
 
     private Meal_Class meal;
-    private String clientName;
-    private String cookName;
+    private String clientID;
+    private String cookID;
     private String pickUpTime;
     private String status;
 
@@ -12,8 +12,8 @@ public class PurchaseRequest {
 
     public PurchaseRequest(Meal_Class meal, String clientName, String cookName, String pickUpTime, String status) {
         this.meal = meal;
-        this.clientName = clientName;
-        this.cookName = cookName;
+        this.clientID = clientName;
+        this.cookID = cookName;
         this.pickUpTime = pickUpTime;
         this.status = status;
     }
@@ -21,11 +21,11 @@ public class PurchaseRequest {
         public Meal_Class getMeal() { return meal; }
     public void setMeal(Meal_Class meal) {this.meal = meal;}
 
-    public String getClientName(){ return clientName; }
-    public void setClientName(String clientName){ this.clientName = clientName; }
+    public String getClientID(){ return clientID; }
+    public void setClientID(String clientName){ this.clientID = clientName; }
 
-    public String getCookName(){ return cookName; }
-    public void setCookName(String cookName){ this.cookName = cookName; }
+    public String getCookID(){ return cookID; }
+    public void setCookID(String cookName){ this.cookID = cookName; }
 
     public String getPickUpTime() { return pickUpTime; }
     public void setPickUpTime(String pickUpTime){}

@@ -38,6 +38,8 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
     List<PurchaseRequest> purchaseRequests;
     PurchaseRequest purchaseRequest;
 
+    private boolean isAcceptable = true;
+
     public ClientPurchaseRequestList(Activity context, List<PurchaseRequest> purchaseRequests) {
 
         super(context, R.layout.activity_home_client, purchaseRequests);
@@ -101,8 +103,7 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 
         // final String complaintId = purchaseRequest.getMeal();
         String meal = String.valueOf(purchaseRequest.getMeal());
-        String cook = String.valueOf(purchaseRequest.getCookName());
-
+        String cook = String.valueOf(purchaseRequest.getCookID());
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         FileTime getLayoutInflater;
@@ -120,20 +121,37 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 
         final AlertDialog builder = dialogBuilder.create();
         builder.show();
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!txtComplaintMessage.equals("")) {
+                String strDescription = txtComplaintMessage.getText().toString();
+
+                // verify
+                boolean isAcceptable = true;
+                Verification_Class verify = new Verification_Class();
+                String descriptionError = verify.checkFirstName(strDescription);
+
+                if (descriptionError != "") {
+                    txtComplaintMessage.setError(descriptionError);
+                    txtComplaintMessage.requestFocus();
+                    isAcceptable = false;
+                }
+                if (isAcceptable) {
                     Date currentDate = new Date();
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     String strCurrentDate = formatter.format(currentDate);
 
+                    // get cook and client uid
+
                     Complaint Complaint = new Complaint();
-                    Complaint.add_complaint(new Complaint(id, purchaseRequest.getClientName(), txtComplaintMessage.getText().toString(), strCurrentDate, purchaseRequest.getCookName()));
+                    Complaint.add_complaint(txtComplaintMessage.getText().toString(), strCurrentDate, purchaseRequest.getCookID());
+
+                    builder.dismiss();
                 }
 
-                builder.dismiss();
+
             }
         });
     }
