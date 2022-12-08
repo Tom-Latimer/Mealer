@@ -38,6 +38,9 @@ public class HomeClient extends AppCompatActivity {
 
         FirebaseAuth.getInstance().signOut();
     }
+    public void btnSearchClick(View view) {
+        startActivity(new Intent(HomeClient.this, SearchMeal.class));
+    }
 
 
     public void welcomeMessage() {

@@ -37,7 +37,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/typeSearchBox"
+            android:id="@+id/nameSearchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -56,7 +56,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/nameSearchBox"
+            android:id="@+id/typeSearchBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -99,6 +99,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:minHeight="30dp"
+            android:onClick="searchMeal"
             android:paddingStart="80dp"
             android:paddingEnd="80dp"
             android:text="@string/searchButton"
