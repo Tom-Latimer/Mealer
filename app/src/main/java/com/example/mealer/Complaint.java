@@ -22,7 +22,11 @@ public class Complaint {
     String _complaintRecipient;
     String _complaintId;
 
-    public Complaint(String id, String message, String date, String recipient, String complainant) {
+    public Complaint(){
+
+    }
+
+    public Complaint(String id, String message, String date, String recipient) {
         _complaintId = id;
         _complaintMessage = message;
         _complaintDate = date;
@@ -60,8 +64,6 @@ public class Complaint {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Complaint");
         String id = ref.push().getKey();
 
-
-
         // get cook id
         ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,9 +71,8 @@ public class Complaint {
                 PurchaseRequest purchaseRequest = (PurchaseRequest) snapshot.getValue(PurchaseRequest.class);
                 DatabaseReference dR = (DatabaseReference) FirebaseDatabase.getInstance().getReference("Users").child(purchaseRequest.getCookID());
                 String complainant = dR.getKey();
-                ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new Complaint(id, message, date, recipient, complainant));
+                ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(new Complaint(id, message, date, recipient));
 
-                ;
             }
 
             @Override

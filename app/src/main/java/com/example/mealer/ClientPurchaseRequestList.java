@@ -64,7 +64,7 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 
         purchaseRequest = purchaseRequests.get(position);
         String mealName = (purchaseRequest.getMeal()).get_name();
-        String cookName = purchaseRequest.getCookName();
+        String cookName = purchaseRequest.getCookID();
         String status = purchaseRequest.getStatus();
         String pickUpTime = purchaseRequest.getPickUpTime();
 
