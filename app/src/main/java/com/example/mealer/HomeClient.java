@@ -3,6 +3,7 @@ package com.example.mealer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,7 @@ public class HomeClient extends AppCompatActivity {
     DatabaseReference databasePurchaseRequests;
     List<PurchaseRequest> purchaseRequests;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +44,10 @@ public class HomeClient extends AppCompatActivity {
                 .child(userId);
         welcomeMessage();
 
+
         // createe recyclerView and populate with Purchase Requests
 
-        listPurchaseRequests = (ListView) findViewById(R.id.listViewClientPurchaseRequests);
+        listPurchaseRequests = (ListView) findViewById(R.id.listViewPurchaseRequests);
 
         databasePurchaseRequests = (DatabaseReference) FirebaseDatabase.getInstance().getReference("PurchaseRequests");
 
