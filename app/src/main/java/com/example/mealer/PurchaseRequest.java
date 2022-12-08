@@ -7,6 +7,7 @@ public class PurchaseRequest {
     private String cookID;
     private String pickUpTime;
     private String status;
+    private float rating;
 
     public PurchaseRequest(){}
 
@@ -16,6 +17,16 @@ public class PurchaseRequest {
         this.cookID = cookName;
         this.pickUpTime = pickUpTime;
         this.status = status;
+        this.rating = -1; // currently unknown (not rated yet)
+    }
+
+    public PurchaseRequest(Meal_Class meal, String clientName, String cookName, String pickUpTime, String status, float rating) {
+        this.meal = meal;
+        this.clientID = clientName;
+        this.cookID = cookName;
+        this.pickUpTime = pickUpTime;
+        this.status = status;
+        this.rating = rating;
     }
 
         public Meal_Class getMeal() { return meal; }
@@ -32,5 +43,8 @@ public class PurchaseRequest {
 
     public String getStatus(){ return status; }
     public void setStatus(String status){ this.status = status; }
+
+    public float getRating(){ return rating; }
+    public void setRating(float rating){ this.rating = rating; }
 
 }

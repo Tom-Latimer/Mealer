@@ -1,6 +1,7 @@
 package com.example.mealer;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.nio.file.attribute.FileTime;
@@ -78,7 +81,13 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
         btnRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // startActivity(new Intent(MainActivity.this, MyOtherActivity.class));
+
+                View parentRow = (View) v.getParent();
+                ListView listView = (ListView) parentRow.getParent();
+                final int position = listView.getPositionForView(parentRow);
+
+                PurchaseRequest purchaseRequest = purchaseRequests.get(position);
+                ShowRateMealDialog(purchaseRequest);
             }
         });
 
@@ -96,6 +105,44 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
         });
 
         return listViewItem;
+
+    }
+
+    public void ShowRateMealDialog(PurchaseRequest purchaseRequest){
+
+        AlertDialog.Builder rankDialog = new AlertDialog.Builder(getContext());
+        FileTime getLayoutInflater;
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        final View dialogView = inflater.inflate(R.layout.activity_rate_meal, null);
+        rankDialog.setView(dialogView);
+
+        final AlertDialog builder = rankDialog.create();
+        rankDialog.show();
+
+        final RatingBar ratingBar = (RatingBar) dialogView.findViewById(R.id.ratingBar);
+
+        // ratingBar.setRating(userRankValue);
+//        rankDialog.setIcon(android.R.drawable.btn_star_big_on);
+//        rankDialog.setTitle("Add Rating: ");
+//        rankDialog.setView(ratingBar);
+
+        // Button OK
+        rankDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // set rating
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference mRatingBarCh = rootRef.child("PurchaseRequest");
+                float ratingValue = ratingBar.getRating();
+                mRatingBarCh.child("rating").setValue(String.valueOf(ratingValue));
+                dialog.dismiss();
+            }
+        })
+        //Button Cancel
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int id) {
+            dialog.cancel();
+        }
+                });
 
     }
 
