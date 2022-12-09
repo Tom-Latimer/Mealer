@@ -39,7 +39,6 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 
     private Activity context;
     List<PurchaseRequest> purchaseRequests;
-    PurchaseRequest purchaseRequest;
 
     private boolean isAcceptable = true;
 
@@ -65,7 +64,7 @@ public class ClientPurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
         TextView txtCookName = (TextView) listViewItem.findViewById(R.id.textViewCook);
         TextView txtStatusName = (TextView) listViewItem.findViewById(R.id.textViewStatus);
 
-        purchaseRequest = purchaseRequests.get(position);
+        PurchaseRequest purchaseRequest = purchaseRequests.get(position);
         String mealName = (purchaseRequest.getMeal()).get_name();
         String cookName = purchaseRequest.getCookID();
         String status = purchaseRequest.getStatus();

@@ -25,7 +25,6 @@ public class PurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
 
     private Activity context;
     List<PurchaseRequest> purchaseRequests;
-    PurchaseRequest purchaseRequest;
 
     public PurchaseRequestList(Activity context, List<PurchaseRequest> purchaseRequests) {
         super(context, R.layout.activity_purchase_request_list, purchaseRequests);
@@ -42,16 +41,20 @@ public class PurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
         TextView txtMealName = (TextView) listViewItem.findViewById(R.id.txtMealName);
         TextView txtClientName = (TextView) listViewItem.findViewById(R.id.txtClientName);
         TextView txtPickUpTime = (TextView) listViewItem.findViewById(R.id.txtPickUpTime);
+        TextView txtStatus = (TextView) listViewItem.findViewById(R.id.txtStatus);
 
         Button btnApprove = (Button) listViewItem.findViewById(R.id.btnApprove);
         Button btnReject = (Button) listViewItem.findViewById(R.id.btnReject);
 
-        purchaseRequest = purchaseRequests.get(position);
+        PurchaseRequest purchaseRequest = purchaseRequests.get(position);
         String mealName = (purchaseRequest.getMeal()).get_name();
         String clientID = purchaseRequest.getClientID();
         String pickUpTime = purchaseRequest.getPickUpTime();
+        String status = purchaseRequest.getStatus();
 
         txtMealName.setText(mealName);
+        txtPickUpTime.setText(pickUpTime);
+        txtStatus.setText(status);
 
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Users").child(clientID);
         dR.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -66,9 +69,6 @@ public class PurchaseRequestList extends ArrayAdapter<PurchaseRequest> {
                 }
             }
         });
-
-
-        txtPickUpTime.setText(pickUpTime);
 
 
         btnApprove.setOnClickListener(new View.OnClickListener() {

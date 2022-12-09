@@ -64,6 +64,26 @@
         app:layout_constraintStart_toEndOf="@+id/txtPickUpTime2"
         app:layout_constraintTop_toBottomOf="@id/txtClientName" />
 
+    <TextView
+        android:id="@+id/txtStatus2"
+        android:layout_width="90dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:text="Status:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/txtPickUpTime2"
+        tools:layout_editor_absoluteX="13dp" />
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="170dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/txtPickUpTime2"
+        app:layout_constraintTop_toBottomOf="@+id/txtPickUpTime" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApprove"
         style="@style/Widget.AppCompat.Button"
@@ -73,8 +93,8 @@
         android:backgroundTint="@color/button_blue"
         android:text="Approve"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="12dp" />
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="25dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnReject"
@@ -85,7 +105,7 @@
         android:backgroundTint="@color/button_blue"
         android:text="Reject"
         android:textColor="@color/white"
-        tools:layout_editor_absoluteX="307dp"
-        tools:layout_editor_absoluteY="54dp" />
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="69dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

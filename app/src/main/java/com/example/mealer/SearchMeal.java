@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
@@ -82,6 +83,11 @@ public class SearchMeal extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void btnBackClick(View view){
+        startActivity(new Intent(SearchMeal.this, HomeClient.class));
+
     }
 
     public void requestMeal(Meal_Class meal, String clientName, String cookName, String pickupTime) {

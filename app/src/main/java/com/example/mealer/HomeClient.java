@@ -73,7 +73,7 @@ public class HomeClient extends AppCompatActivity {
                 }
 
                 ClientPurchaseRequestList purchaseRequestAdapter = new ClientPurchaseRequestList(HomeClient.this, purchaseRequests);
-                listPurchaseRequests.setAdapter(purchaseRequestAdapter);
+                //listPurchaseRequests.setAdapter(purchaseRequestAdapter);
             }
 
             @Override
