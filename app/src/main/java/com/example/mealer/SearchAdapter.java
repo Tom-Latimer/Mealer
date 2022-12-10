@@ -1,6 +1,7 @@
 package com.example.mealer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.d("TAG",error.getMessage());
             }
         });
 

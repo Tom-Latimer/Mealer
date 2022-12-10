@@ -11,11 +11,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -123,10 +126,27 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
 
     }
 
-    public void requestMeal(Meal_Class meal, String clientName, String cookName, String pickupTime) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MealRequests").child(meal.get_cookID());
-        PurchaseRequest request = new PurchaseRequest(meal, clientName, cookName, pickupTime, "Pending");
-        ref.push().setValue(request);
+    public void requestMeal(Meal_Class meal, String cookName, String pickupTime) {
+        //reference to push meal request
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("PurchaseRequests").child(meal.get_cookID());
+        //current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //Reference to get current users name
+        DatabaseReference clientRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+        clientRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Client_Class client = snapshot.getValue(Client_Class.class);
+                PurchaseRequest request = new PurchaseRequest(meal, client.get_name(), cookName, pickupTime, "Pending");
+                ref.push().setValue(request);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("TAG",error.getMessage());
+            }
+        });
+
     }
 
     @Override
@@ -147,6 +167,7 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
         final TextView txtAllergens = dialogView.findViewById(R.id.searchViewAllergens);
         final TextView txtMealPrice = dialogView.findViewById(R.id.searchViewPrice);
         final TextView txtMealDescription = dialogView.findViewById(R.id.searchViewDescription);
+        final EditText pickupTimeBox = dialogView.findViewById(R.id.pickUpTimeEditText);
         final AppCompatButton purchaseMealBtn = dialogView.findViewById(R.id.purchaseMealBtn);
 
         String title = "Meal ID: " + meal.get_mealID();
@@ -158,6 +179,8 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
         txtCuisineType.setText(meal.get_Cuisine_type());
         txtIngredients.setText(meal.get_ingredients());
         txtAllergens.setText(meal.get_allergens());
+
+        String pickupTime = pickupTimeBox.getText().toString().trim();
 
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(meal.get_cookID());
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -180,6 +203,7 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
         purchaseMealBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                requestMeal(meal,txtCookName.getText().toString().trim(),pickupTime);
                 builder.dismiss();
             }
         });
