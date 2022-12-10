@@ -189,7 +189,7 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Cook_Class cook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                txtCookRating.setText("NOT IMPL.");
+                txtCookRating.setText(String.valueOf(cook.get_average_rating()));
                 txtCookName.setText(cook.get_name());
             }
 

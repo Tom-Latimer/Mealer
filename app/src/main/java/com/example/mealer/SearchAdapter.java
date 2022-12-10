@@ -51,7 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Cook_Class cook = (Cook_Class) snapshot.getValue(Cook_Class.class);
-                holder.chefRating.setText("NOT IMPL.");
+                holder.chefRating.setText(String.valueOf(cook.get_average_rating()));
                 holder.chefName.setText(cook.get_name());
             }
 
