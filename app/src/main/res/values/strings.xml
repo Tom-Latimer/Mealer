@@ -37,4 +37,14 @@
     <string name="cuisineTypeHint">Cuisine Type...</string>
     <string name="searchButton">Search</string>
     <string name="backButton">Back</string>
+    <string name="search_for_meals">Search for Meals</string>
+    <string name="complain">Complain</string>
+    <string name="rate">Rate</string>
+    <string name="meal">Meal</string>
+    <string name="status">Status</string>
+    <string name="submit">Submit</string>
+    <string name="submit_complaint">Submit Complaint</string>
+    <string name="MealSearchName">Enter meal name, type or cuisine</string>
+    <string name="buyMeal">Purchase Meal</string>
+    <string name="timeHint">Please Specify Pickup Time</string>
 </resources>

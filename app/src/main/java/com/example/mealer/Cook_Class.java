@@ -21,6 +21,9 @@ public class Cook_Class extends User_Class {
     private String suspensionDate;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user.getUid();
+    private double averageRating;
+    private int ratingAmount;
+
     public Cook_Class(){
 
     }
@@ -36,6 +39,8 @@ public class Cook_Class extends User_Class {
         set_suspension_date("");
         set_meals(mealList);
         set_purchaseRequests(purchaseRequestsList);
+        averageRating = 0;
+        ratingAmount = 0;
     }
     public String get_void_check_URL(){
         return void_check_URL;
@@ -70,6 +75,11 @@ public class Cook_Class extends User_Class {
         purchaseRequests = lstPurchaseRequests;
     }
 
+    public void set_average_rating(double rating) {this.averageRating = rating;}
+    public double get_average_rating(){return averageRating;}
+    public void set_rating_amount(int amount){this.ratingAmount = amount;}
+    public int get_rating_amount(){return ratingAmount;}
+
     public void delete_meal(String meal){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Meals").child(uid);
         ref.child(meal).removeValue();
@@ -85,6 +95,12 @@ public class Cook_Class extends User_Class {
         meal.set_cookID(uid);
         ref.child(id).setValue(meal);
 
+    }
+
+    public void updateRating(int newRating) {
+
+       averageRating = ((averageRating * ratingAmount) + newRating) / (ratingAmount + 1);
+       averageRating++;
     }
 
 }
