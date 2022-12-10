@@ -31,6 +31,7 @@ public class HomeClient extends AppCompatActivity {
     ListView listPurchaseRequests;
     DatabaseReference databasePurchaseRequests;
     List<PurchaseRequest> purchaseRequests;
+    String userID;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,9 +40,9 @@ public class HomeClient extends AppCompatActivity {
         setContentView(R.layout.activity_home_client);
         getWindow().setStatusBarColor(getResources().getColor(R.color.button_blue));
 
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
-                .child(userId);
+                .child(userID);
         welcomeMessage();
 
         // create listView and populate with Purchase Requests
@@ -67,7 +68,9 @@ public class HomeClient extends AppCompatActivity {
 
                     PurchaseRequest purchaseRequest = postSnapshot.getValue(PurchaseRequest.class);
 
-                    purchaseRequests.add(purchaseRequest);
+                    if(purchaseRequest.getClientID().equals(userID)){
+                        purchaseRequests.add(purchaseRequest);
+                    }
                 }
 
                 ClientPurchaseRequestList purchaseRequestAdapter = new ClientPurchaseRequestList(HomeClient.this, purchaseRequests);
