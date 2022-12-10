@@ -23,10 +23,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
     Context context;
     ArrayList<Meal_Class> list;
+    private OnInfoListener mOnInfoListener;
 
-    public SearchAdapter(Context context, ArrayList<Meal_Class> list) {
+    public SearchAdapter(Context context, ArrayList<Meal_Class> list, OnInfoListener onInfoListener) {
         this.context = context;
         this.list = list;
+        this.mOnInfoListener = onInfoListener;
     }
 
 
@@ -34,7 +36,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.search_result,parent,false);
-        return new MyViewHolder(v);
+        return new MyViewHolder(v, mOnInfoListener);
 
     }
 
@@ -65,16 +67,29 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         return list.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         TextView mealName, mealPrice, chefName, chefRating;
+        OnInfoListener onInfoListener;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, OnInfoListener onInfoListener) {
             super(itemView);
             mealName = itemView.findViewById(R.id.mealNameSearch);
             mealPrice = itemView.findViewById(R.id.mealPriceSearch);
             chefName = itemView.findViewById(R.id.chefNameSearch);
             chefRating = itemView.findViewById(R.id.chefRatingSearch);
+            this.onInfoListener = onInfoListener;
+
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            onInfoListener.onInfoClick(getAdapterPosition());
+            return true;
+        }
+    }
+    public interface OnInfoListener {
+        void onInfoClick(int position);
     }
 }
