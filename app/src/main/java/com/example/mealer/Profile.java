@@ -38,7 +38,7 @@ public class Profile extends AppCompatActivity {
                     String lastName = snapshot.child("_last_name").getValue().toString();
                     String address= snapshot.child("_address").getValue().toString();
                     String country=snapshot.child("_country").getValue().toString();
-                    String description=snapshot.child("description").getValue().toString();
+                    String description=snapshot.child("_description").getValue().toString();
                     TextView firstNameView = findViewById(R.id.firstNameView);
                     TextView lastNameView=findViewById(R.id.lastNameView);
                     TextView addressView=findViewById(R.id.addressView);
