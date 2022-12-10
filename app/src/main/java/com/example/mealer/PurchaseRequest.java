@@ -8,6 +8,7 @@ public class PurchaseRequest {
     private String pickUpTime;
     private String status;
     private float rating;
+    private String purchaseRequestID;
 
     public PurchaseRequest(){}
 
@@ -47,4 +48,11 @@ public class PurchaseRequest {
     public float getRating(){ return rating; }
     public void setRating(float rating){ this.rating = rating; }
 
+    public String getPurchaseRequestID() {
+        return purchaseRequestID;
+    }
+
+    public void setPurchaseRequestID(String purchaseRequestID) {
+        this.purchaseRequestID = purchaseRequestID;
+    }
 }
