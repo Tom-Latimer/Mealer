@@ -45,4 +45,6 @@
     <string name="submit">Submit</string>
     <string name="submit_complaint">Submit Complaint</string>
     <string name="MealSearchName">Enter meal name, type or cuisine</string>
+    <string name="buyMeal">Purchase Meal</string>
+    <string name="timeHint">Please Specify Pickup Time</string>
 </resources>
