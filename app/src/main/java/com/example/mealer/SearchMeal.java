@@ -23,7 +23,7 @@ import java.util.List;
 
 
 public class SearchMeal extends AppCompatActivity {
-
+    boolean suspended = false;
     RecyclerView searchResultsRecycler;
     ArrayList<Meal_Class> results = new ArrayList<>();
     private EditText mealNameEdt, mealTypeEdt, cuisineTypeEdt;
@@ -59,6 +59,11 @@ public class SearchMeal extends AppCompatActivity {
         //clear adapter of all meals
         results.clear();
         recyclerView.setAdapter(adapter);
+        //get the cookid of the meal and turn it into a string
+        DatabaseReference dbRef2 = FirebaseDatabase.getInstance().getReference("Users");
+
+
+
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -66,6 +71,29 @@ public class SearchMeal extends AppCompatActivity {
                     for (DataSnapshot mealSnapshot : snapshot.getChildren()) {
                         for(DataSnapshot meals : mealSnapshot.getChildren()) {
                             Meal_Class meal = meals.getValue(Meal_Class.class);
+                            String cookId = meal.get_cookID();
+
+
+                            dbRef2.child(cookId).child("_suspended").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (!results.isEmpty() && results.contains(meal)) {
+                                        if (!results.get(results.indexOf(meal)).isOffered()) {
+                                            if (snapshot.getValue().toString().equals("true")) {
+                                                results.remove(meal);
+                                            }
+                                        }
+
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+
                             if (meal.get_name().equals(mealName) || meal.get_Meal_type().equals(mealName) || meal.get_Cuisine_type().equals(mealName)) {
                                 results.add(meal);
                             }
@@ -73,7 +101,7 @@ public class SearchMeal extends AppCompatActivity {
 
                         }
                     }
-                    adapter.notifyDataSetChanged();
+
                 }
             }
 

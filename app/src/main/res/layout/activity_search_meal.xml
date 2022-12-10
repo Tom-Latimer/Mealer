@@ -48,6 +48,7 @@
             android:hint="@string/MealSearchName"
             android:inputType="textPersonName"
 
+            android:minHeight="48dp"
             android:paddingStart="17dp"
             android:paddingTop="5dp"
             android:paddingEnd="17dp"
@@ -62,7 +63,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
-            android:minHeight="30dp"
+            android:minHeight="48dp"
             android:onClick="searchMeal"
             android:paddingStart="80dp"
             android:paddingEnd="80dp"
