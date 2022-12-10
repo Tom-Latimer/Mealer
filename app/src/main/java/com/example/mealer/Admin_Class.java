@@ -42,7 +42,7 @@ public class Admin_Class extends User_Class {
                 dR.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        snapshot.getRef().child("_suspended").setValue("true");
+                        snapshot.getRef().child("_suspended").setValue(true);
                         snapshot.getRef().child("_suspension_date").setValue("");
                         complaintDb.child(id).removeValue();
                     }
@@ -84,7 +84,7 @@ public class Admin_Class extends User_Class {
                         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
                         String strSuspensionDate = sdfDate.format(suspensionDate.getTime());
 
-                        snapshot.getRef().child("_suspended").setValue("true");
+                        snapshot.getRef().child("_suspended").setValue(true);
                         snapshot.getRef().child("_suspension_date").setValue(strSuspensionDate);
                         complaintDb.child(id).removeValue();
 
