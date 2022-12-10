@@ -44,9 +44,7 @@ public class HomeClient extends AppCompatActivity {
                 .child(userId);
         welcomeMessage();
 
-
-        // createe recyclerView and populate with Purchase Requests
-
+        // create listView and populate with Purchase Requests
         listPurchaseRequests = (ListView) findViewById(R.id.listViewPurchaseRequests);
 
         databasePurchaseRequests = (DatabaseReference) FirebaseDatabase.getInstance().getReference("PurchaseRequests");
@@ -73,7 +71,7 @@ public class HomeClient extends AppCompatActivity {
                 }
 
                 ClientPurchaseRequestList purchaseRequestAdapter = new ClientPurchaseRequestList(HomeClient.this, purchaseRequests);
-                //listPurchaseRequests.setAdapter(purchaseRequestAdapter);
+                listPurchaseRequests.setAdapter(purchaseRequestAdapter);
             }
 
             @Override
