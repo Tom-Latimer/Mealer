@@ -137,7 +137,7 @@ public class SearchMeal extends AppCompatActivity implements SearchAdapter.OnInf
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Client_Class client = snapshot.getValue(Client_Class.class);
-                PurchaseRequest request = new PurchaseRequest(meal, client.get_name(), cookName, pickupTime, "Pending");
+                PurchaseRequest request = new PurchaseRequest(meal, snapshot.getKey(), cookName, pickupTime, "Pending");
                 ref.push().setValue(request);
             }
 
