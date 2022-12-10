@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class HomeClient extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class HomeClient extends AppCompatActivity {
         // create listView and populate with Purchase Requests
         listPurchaseRequests = (ListView) findViewById(R.id.listViewPurchaseRequests);
 
-        databasePurchaseRequests = (DatabaseReference) FirebaseDatabase.getInstance().getReference("PurchaseRequests");
+        databasePurchaseRequests = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("PurchaseRequests");
 
         purchaseRequests = new ArrayList<>();
 
@@ -58,23 +59,28 @@ public class HomeClient extends AppCompatActivity {
     protected void onStart() {
 
         super.onStart();
-        databasePurchaseRequests.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        databasePurchaseRequests.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 purchaseRequests.clear();
 
-                for (DataSnapshot postSnapshot : snapshot.getChildren()){
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot post : postSnapshot.getChildren()) {
+                        if (post.exists()) {
 
-                    PurchaseRequest purchaseRequest = postSnapshot.getValue(PurchaseRequest.class);
+                            PurchaseRequest purchaseRequest = post.getValue(PurchaseRequest.class);
 
-                    if(purchaseRequest.getClientID().equals(userID)){
-                        purchaseRequests.add(purchaseRequest);
+                            if (purchaseRequest.getClientID().equals(userID)) {
+                                purchaseRequests.add(purchaseRequest);
+                            }
+                        }
+
                     }
-                }
 
-                ClientPurchaseRequestList purchaseRequestAdapter = new ClientPurchaseRequestList(HomeClient.this, purchaseRequests);
-                listPurchaseRequests.setAdapter(purchaseRequestAdapter);
+                    ClientPurchaseRequestList purchaseRequestAdapter = new ClientPurchaseRequestList(HomeClient.this, purchaseRequests);
+                    listPurchaseRequests.setAdapter(purchaseRequestAdapter);
+                }
             }
 
             @Override
@@ -82,7 +88,7 @@ public class HomeClient extends AppCompatActivity {
 
             }
         });
-    }
+    };
 
     public void btnSearchMealsClick(View view){
         startActivity(new Intent(HomeClient.this, SearchMeal.class));
